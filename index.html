@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="en" class="lang-en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khushi — Women's Reproductive Healthcare</title>
+    <!-- Typography: Montserrat (headings), Open Sans (body), Noto Sans Devanagari (Hindi) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /*
+        Khushi Design System — Premium, Human-Centered
+        - Colors: exact brand palette + authentic packaging colors
+        - Typography: Montserrat (headings), Open Sans (body), Noto Sans Devanagari (Hindi)
+        - Depth: soft-3D illusion via layered box-shadows and subtle transforms
+        - Glassmorphism: translucent surfaces with backdrop-filter: blur() and soft borders
+        - Messaging: emotionally resonant, engaging, inclusive of women and partners
+      */
+
+      :root {
+        /* Brand Palette: EXACT hex values */
+        --color-primary-yellow: #fff36d;
+        --color-accent-orange: #f28c38;
+        --color-teal-blue: #00a8e8;
+        --color-purple: #6a2c91;
+        --color-green: #2ead4f;
+        --color-text-dark: #333333;
+        --color-bg-white: #ffffff;
+
+        /* Real Khushi packaging colors for authentic feel */
+        --color-napkin-orange: #ff6b35;
+        --color-mtkit-pink: #d63384;
+        --color-product-purple: #4a1a5f;
+
+        /* Extended neutrals for surfaces and shadows */
+        --color-glass-white: rgba(255, 255, 255, 0.55);
+        --color-glass-border: rgba(255, 255, 255, 0.7);
+        --color-shadow-soft: rgba(0, 0, 0, 0.08);
+        --color-shadow-medium: rgba(0, 0, 0, 0.14);
+        --color-shadow-strong: rgba(0, 0, 0, 0.2);
+
+        /* Spacing scale */
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        --space-6: 1.5rem;
+        --space-8: 2rem;
+        --space-10: 2.5rem;
+        --space-12: 3rem;
+        --space-16: 4rem;
+        --space-20: 5rem;
+
+        /* Radii */
+        --radius-sm: 12px;
+        --radius-md: 18px;
+        --radius-lg: 24px;
+        --radius-xl: 32px;
+        --radius-pill: 999px;
+
+        /* Shadows & Elevation: premium, multi-layer soft-3D */
+        --elev-1: 0 1px 2px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.05);
+        --elev-2: 0 2px 4px rgba(0,0,0,0.07), 0 8px 20px rgba(0,0,0,0.08);
+        --elev-3: 0 6px 16px rgba(0,0,0,0.08), 0 16px 32px rgba(0,0,0,0.1);
+        --elev-4: 0 12px 28px rgba(0,0,0,0.1), 0 28px 48px rgba(0,0,0,0.12);
+        --shadow-glow-yellow: 0 0 0 5px rgba(255, 243, 109, 0.28);
+        --shadow-glow-teal: 0 0 0 5px rgba(0, 168, 232, 0.2);
+        --shadow-glow-orange: 0 0 0 5px rgba(242, 140, 56, 0.2);
+        --shadow-glow-green: 0 0 0 5px rgba(46, 173, 79, 0.2);
+
+        /* Motion easing */
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+        /* Container width */
+        --container-max: 1200px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        color: var(--color-text-dark);
+        background: var(--color-bg-white);
+        font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      h1, h2, h3, h4 {
+        font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        margin: 0 0 var(--space-6);
+        line-height: 1.22;
+        letter-spacing: 0.1px;
+      }
+      h1 { font-weight: 700; font-size: clamp(2.2rem, 4vw, 3.2rem); }
+      h2 { font-weight: 600; font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+      h3 { font-weight: 600; font-size: clamp(1.2rem, 1.8vw, 1.4rem); }
+      p { margin: 0 0 var(--space-4); }
+      .hi, .lang-hi .hi { font-family: "Noto Sans Devanagari", sans-serif; }
+      .lang-hi .en { display: none; }
+      .lang-en .hi { display: none; }
+
+      .container {
+        width: 100%;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 var(--space-8);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-4) var(--space-8);
+        border-radius: var(--radius-pill);
+        border: 1px solid rgba(0,0,0,0.04);
+        background: linear-gradient(180deg, var(--color-primary-yellow) 0%, var(--color-bg-white) 100%);
+        color: #222;
+        font-weight: 600;
+        box-shadow: var(--elev-2);
+        transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), filter 220ms var(--ease-out);
+        will-change: transform, box-shadow;
+      }
+      .btn:hover { transform: translateY(-2px); box-shadow: var(--elev-3); filter: brightness(1.03); }
+      .btn:active { transform: translateY(0); box-shadow: var(--elev-2); }
+      .btn.secondary { background: linear-gradient(180deg, var(--color-teal-blue) 0%, #0fb5ef 100%); color: white; }
+      .btn:focus-visible { outline: none; box-shadow: var(--elev-3), 0 0 0 3px rgba(0,168,232,0.35); }
+
+      .glass {
+        background: var(--color-glass-white);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid var(--color-glass-border);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), var(--elev-2);
+      }
+
+      .header-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+      header.header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-4) 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+      }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        font-weight: 700;
+        font-family: "Montserrat";
+        color: var(--color-purple);
+      }
+      .logo-mark {
+        width: 36px; height: 36px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, var(--color-primary-yellow), var(--color-teal-blue));
+        box-shadow: var(--elev-1);
+        border: 1px solid rgba(255,255,255,0.6);
+      }
+      nav.nav { display: none; }
+      @media (min-width: 900px) {
+        nav.nav { display: flex; gap: var(--space-6); }
+      }
+      .nav a {
+        position: relative;
+        color: var(--color-text-dark);
+        text-decoration: none;
+        font-weight: 600;
+        padding: var(--space-3) 0;
+        transition: color 180ms var(--ease-out);
+      }
+      .nav a::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: -6px;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, var(--color-teal-blue), var(--color-purple));
+        opacity: 0; transform: translateY(4px);
+        transition: transform 220ms var(--ease-out), opacity 220ms var(--ease-out);
+      }
+      .nav a:hover { color: #000; }
+      .nav a:hover::after { opacity: 0.4; transform: translateY(0); }
+      .nav a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(0,168,232,0.25); border-radius: var(--radius-pill); }
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-4);
+        border-radius: var(--radius-pill);
+        background: rgba(106,44,145,0.08);
+        color: var(--color-purple);
+        border: 1px solid rgba(106,44,145,0.12);
+        box-shadow: var(--elev-1);
+        cursor: pointer;
+        user-select: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .lang-toggle:hover {
+        background: rgba(106,44,145,0.15);
+        border-color: rgba(106,44,145,0.25);
+      }
+
+      .hero {
+        background: linear-gradient(135deg, #ffd940 0%, #ffe082 100%);
+        padding: var(--space-8);
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+      .hero::before {
+        content: '🩸';
+        position: absolute;
+        font-size: 120px;
+        opacity: 0.08;
+        top: 5%;
+        left: 8%;
+        z-index: 0;
+        animation: float3d 8s ease-in-out infinite;
+        transform: perspective(1000px) rotateY(20deg) rotateX(-10deg);
+      }
+      .hero::after {
+        content: '⭕';
+        position: absolute;
+        font-size: 100px;
+        opacity: 0.07;
+        bottom: 12%;
+        right: 10%;
+        z-index: 0;
+        animation: float3d 10s ease-in-out infinite reverse;
+        transform: perspective(1000px) rotateY(-25deg) rotateX(15deg);
+      }
+      /* Additional floating decorative elements */
+      .hero {
+        background: 
+          linear-gradient(135deg, #ffd940 0%, #ffe082 100%),
+          radial-gradient(circle at 10% 30%, rgba(0,168,232,0.06) 0%, transparent 30%),
+          radial-gradient(circle at 90% 70%, rgba(106,44,145,0.05) 0%, transparent 35%);
+        background-size: 100% 100%, 100% 100%, 100% 100%;
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        align-items: center;
+        width: 100%;
+        max-width: 1400px;
+        position: relative;
+        z-index: 1;
+      }
+      @media (min-width: 900px) {
+        .hero-inner { grid-template-columns: auto 1.2fr 1.1fr; gap: var(--space-12); }
+      }
+      /* 3D floating decorative elements */
+      .hero-inner::before {
+        content: '💊';
+        position: absolute;
+        font-size: 80px;
+        opacity: 0.09;
+        top: 15%;
+        right: 5%;
+        z-index: 0;
+        animation: float3d 7s ease-in-out infinite;
+        transform: perspective(1200px) rotateY(-30deg) rotateX(20deg) rotateZ(15deg);
+      }
+      .hero-inner::after {
+        content: '✓';
+        position: absolute;
+        font-size: 90px;
+        opacity: 0.06;
+        bottom: 20%;
+        left: 3%;
+        z-index: 0;
+        animation: float3d 9s ease-in-out infinite reverse;
+        transform: perspective(1200px) rotateY(35deg) rotateX(-15deg) rotateZ(-20deg);
+      }
+      @keyframes float3d {
+        0%, 100% { 
+          transform: perspective(1200px) rotateY(var(--ry, 20deg)) rotateX(var(--rx, -10deg)) translateY(0px);
+          opacity: 0.06;
+        }
+        50% { 
+          transform: perspective(1200px) rotateY(var(--ry, 20deg)) rotateX(var(--rx, -10deg)) translateY(-30px);
+          opacity: 0.12;
+        }
+      }
+      .hero-card {
+        border-radius: var(--radius-xl);
+        padding: var(--space-12);
+        background: var(--color-bg-white);
+        border: 1px solid rgba(0,0,0,0.06);
+        box-shadow: var(--elev-3);
+        display: none;
+        position: relative;
+        z-index: 2;
+      }
+      @media (max-width: 999px) { .hero-card { display: block; } }
+      .hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+      .hero p { font-size: clamp(1rem, 1.5vw, 1.125rem); max-width: 60ch; opacity: 0.95; }
+      .hero-actions { display: flex; gap: var(--space-4); margin-top: var(--space-6); flex-wrap: wrap; }
+      /* Product gallery hero: left thumbnails, center image, right content */
+      .hero-product {
+        display: none;
+      }
+      @media (min-width: 1000px) {
+        .hero-product { display: contents; }
+      }
+      .gallery-thumbs {
+        display: grid;
+        gap: var(--space-4);
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+      }
+      @media (min-width: 900px) {
+        .gallery-thumbs { gap: var(--space-6); }
+      }
+      .gallery-thumb {
+        width: 100px;
+        height: 100px;
+        border-radius: var(--radius-lg);
+        border: 3px solid rgba(255,255,255,0.6);
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 220ms var(--ease-out);
+        display: grid;
+        place-items: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        box-shadow: 
+          0 8px 24px rgba(0,0,0,0.15),
+          inset 0 1px 0 rgba(255,255,255,0.5);
+        position: relative;
+      }
+      .gallery-thumb::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 50%);
+        pointer-events: none;
+      }
+      .gallery-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gallery-thumb:hover {
+        transform: translateY(-8px) scale(1.05);
+        border-color: rgba(255,255,255,0.8);
+        box-shadow: 
+          0 16px 40px rgba(0,0,0,0.2),
+          inset 0 1px 0 rgba(255,255,255,0.6);
+      }
+      .gallery-thumb.active {
+        border-color: rgba(255,255,255,0.9);
+        box-shadow: 
+          0 0 0 5px rgba(255,255,255,0.4), 
+          0 16px 48px rgba(0,0,0,0.25),
+          inset 0 2px 0 rgba(255,255,255,0.7);
+        transform: translateY(-10px) scale(1.08);
+      }
+      .gallery-main {
+        display: grid;
+        place-items: center;
+        min-height: 320px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--color-bg-white) 0%, rgba(255,243,109,0.08) 100%);
+        border-radius: var(--radius-xl);
+        border: 1.5px solid rgba(0,0,0,0.08);
+        box-shadow: var(--elev-3);
+      }
+      .gallery-main::before {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(0,168,232,0.08), transparent 70%);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+        animation: float 6s ease-in-out infinite;
+      }
+      .gallery-main::after {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(106,44,145,0.06), transparent 70%);
+        border-radius: 50%;
+        bottom: -80px;
+        left: -80px;
+        z-index: 0;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(20px); }
+      }
+      @media (min-width: 900px) {
+        .gallery-main { min-height: 420px; }
+      }
+      .gallery-image {
+        width: 280px;
+        height: 280px;
+        display: none;
+        place-items: center;
+        color: #fff;
+        font-size: 3.6rem;
+        font-weight: 700;
+        z-index: 2;
+        transition: all 280ms var(--ease-out);
+        object-fit: cover;
+        position: relative;
+        animation: floatIn 400ms var(--ease-out), pulse 3s ease-in-out infinite;
+        filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12));
+      }
+      .gallery-image::before {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        background: linear-gradient(135deg, var(--color-teal-blue), var(--color-purple));
+        border-radius: 8px;
+        opacity: 0.15;
+        z-index: -1;
+        filter: blur(12px);
+      }
+      @keyframes pulse {
+        0%, 100% { filter: drop-shadow(0 8px 20px rgba(0,0,0,0.12)); }
+        50% { filter: drop-shadow(0 12px 28px rgba(0,168,232,0.2)); }
+      }
+      @keyframes floatIn {
+        from { 
+          transform: scale(0.92) translateY(10px); 
+          opacity: 0.8; 
+        }
+        to { 
+          transform: scale(1) translateY(0); 
+          opacity: 1; 
+        }
+      }
+      .gallery-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      @media (min-width: 900px) {
+        .gallery-image { width: 360px; height: 360px; font-size: 4.4rem; }
+      }
+      .gallery-image.active { display: grid; transform: scale(1) rotateY(0deg); }
+      .gallery-content {
+        padding: var(--space-10);
+        color: var(--color-text-dark);
+        position: relative;
+        z-index: 2;
+      }
+      @media (min-width: 900px) {
+        .gallery-content { padding: var(--space-12); }
+      }
+      .gallery-content h2 { color: var(--color-purple); margin-top: 0; font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: 0.3px; }
+      .gallery-content p { color: var(--color-text-dark); margin-bottom: var(--space-4); font-size: clamp(0.95rem, 1.2vw, 1rem); line-height: 1.6; }
+      .gallery-badges { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-8); }
+      .gallery-badge {
+        display: inline-flex;
+        padding: 8px 16px;
+        border-radius: var(--radius-pill);
+        background: rgba(0,0,0,0.04);
+        color: var(--color-text-dark);
+        font-weight: 600;
+        font-size: 0.8rem;
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: var(--elev-1);
+      }
+      .gallery-cta { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-8); }
+
+      section { padding: var(--space-16) 0; }
+      .section-title { margin-bottom: var(--space-8); }
+
+      /* Product portfolio banner - unified premium 3D stack */
+      .portfolio {
+        background: #fff;
+        border-top: 2px solid rgba(255,243,109,0.4);
+        border-bottom: 2px solid rgba(0,168,232,0.3);
+        padding: var(--space-20) 0;
+        position: relative;
+        overflow: hidden;
+        perspective: 1200px;
+      }
+      .portfolio::before {
+        content: '';
+        position: absolute;
+        top: -10%;
+        right: -5%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(255,243,109,0.08), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 10s ease-in-out infinite;
+        transform: perspective(1200px) rotateY(-25deg) rotateX(15deg);
+      }
+      .portfolio::after {
+        content: '';
+        position: absolute;
+        bottom: -8%;
+        left: -3%;
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, rgba(106,44,145,0.07), transparent 65%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 12s ease-in-out infinite reverse;
+        transform: perspective(1200px) rotateY(28deg) rotateX(-18deg);
+      }
+      .portfolio .container { position: relative; z-index: 2; }
+      .portfolio-hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+        align-items: center;
+      }
+      @media (min-width: 900px) {
+        .portfolio-hero { grid-template-columns: 1.05fr 0.95fr; }
+      }
+      .portfolio-copy {
+        background: linear-gradient(135deg, rgba(255,243,109,0.08) 0%, rgba(255,255,255,0.95) 50%, rgba(0,168,232,0.05) 100%);
+        border-radius: var(--radius-xl);
+        padding: var(--space-12);
+        border: 2px solid rgba(255,243,109,0.4);
+        box-shadow: var(--elev-4), 
+                    0 0 0 1px rgba(255,243,109,0.3),
+                    inset 0 1px 2px rgba(255,255,255,0.8);
+        position: relative;
+        overflow: hidden;
+      }
+      .portfolio-copy::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(255,243,109,0.1), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 8s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .portfolio-copy > * { position: relative; z-index: 1; }
+      .portfolio-copy h2 { 
+        margin-bottom: var(--space-4);
+        background: linear-gradient(135deg, var(--color-purple), var(--color-teal-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .portfolio-copy p { 
+        color: #2a2a2a;
+        margin-bottom: var(--space-4);
+        line-height: 1.7;
+        font-weight: 500;
+      }
+      .portfolio-chip-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: var(--space-4);
+        margin-top: var(--space-8);
+      }
+      .portfolio-chip {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-4) var(--space-6);
+        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,243,109,0.15));
+        border: 2px solid rgba(255,243,109,0.5);
+        box-shadow: var(--elev-2),
+                    inset 0 1px 2px rgba(255,255,255,0.8);
+        font-weight: 700;
+        color: var(--color-text-dark);
+        transition: all 240ms var(--ease-out);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      .portfolio-chip::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        opacity: 0;
+        transition: opacity 240ms var(--ease-out);
+      }
+      .portfolio-chip:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: var(--elev-3),
+                    inset 0 1px 2px rgba(255,255,255,0.9),
+                    0 0 0 2px rgba(255,243,109,0.6);
+        border-color: rgba(255,243,109,0.8);
+        background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,243,109,0.25));
+      }
+      .portfolio-chip:hover::before { opacity: 1; }
+      .portfolio-chip span.icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, rgba(255,243,109,0.3), rgba(255,243,109,0.15));
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(255,243,109,0.2);
+      }
+      .portfolio-stack {
+        position: relative;
+        perspective: 1400px;
+        display: grid;
+        gap: var(--space-4);
+      }
+      .stack-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        padding: var(--space-8);
+        color: #fff;
+        box-shadow: var(--elev-3);
+        border: 1.5px solid rgba(255,255,255,0.3);
+        overflow: hidden;
+        transform: translateZ(0);
+        transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
+      }
+      .stack-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16), transparent 45%);
+        pointer-events: none;
+      }
+      .stack-card:hover {
+        transform: translateY(-10px) scale(1.01);
+        box-shadow: var(--elev-4);
+      }
+      .stack-card h3 { margin: 0 0 var(--space-2); font-size: 1.2rem; }
+      .stack-card p { margin: 0; color: rgba(255,255,255,0.9); }
+      .stack-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: var(--radius-pill);
+        background: rgba(255,255,255,0.18);
+        font-size: 0.8rem;
+        margin-bottom: var(--space-3);
+      }
+      .stack-napkins { background: linear-gradient(135deg, #ff6b35, #ff9a4d); transform: translateZ(0) rotateY(-6deg) translateY(0); }
+      .stack-pills { background: linear-gradient(135deg, #6a2c91, #8c45b3); transform: translateZ(20px) rotateY(4deg) translateY(-6px); }
+      .stack-mtkit { background: linear-gradient(135deg, #d63384, #ef72b1); box-shadow: var(--elev-4), var(--shadow-glow-yellow); transform: translateZ(40px) rotateY(-3deg) translateY(-12px); }
+      .stack-pregnancy { background: linear-gradient(135deg, #00a8e8, #2ead4f); transform: translateZ(60px) rotateY(5deg) translateY(-18px); }
+
+      /* Why Khushi section */
+      #why {
+        background: linear-gradient(135deg, #ffd940 0%, #ffe082 100%),
+          radial-gradient(circle at 10% 30%, rgba(0,168,232,0.06) 0%, transparent 30%),
+          radial-gradient(circle at 90% 70%, rgba(106,44,145,0.05) 0%, transparent 35%);
+        border-bottom: 2px solid rgba(0,168,232,0.2);
+        position: relative;
+        overflow: hidden;
+        perspective: 1200px;
+      }
+      #why::before {
+        content: '';
+        position: absolute;
+        top: -15%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,243,109,0.09), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 12s ease-in-out infinite;
+        transform: perspective(1200px) rotateY(20deg) rotateX(-15deg);
+      }
+      #why::after {
+        content: '';
+        position: absolute;
+        bottom: -10%;
+        right: -8%;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(0,168,232,0.07), transparent 65%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 14s ease-in-out infinite reverse;
+        transform: perspective(1200px) rotateY(-22deg) rotateX(18deg);
+      }
+      #why .container { position: relative; z-index: 2; }
+      .section-title {
+        margin-bottom: var(--space-10);
+        background: linear-gradient(135deg, var(--color-purple), var(--color-teal-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+        text-align: center;
+      }
+      .why-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      @media (min-width: 900px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+      .why-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,243,109,0.08) 50%, rgba(255,255,255,0.95) 100%);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--elev-3),
+                    inset 0 1px 2px rgba(255,255,255,0.9),
+                    0 0 0 1px rgba(255,243,109,0.3);
+        padding: var(--space-10);
+        border: 2px solid rgba(255,243,109,0.4);
+        transition: all 280ms var(--ease-out);
+        position: relative;
+        overflow: hidden;
+        animation: floatUp 600ms var(--ease-out) both;
+      }
+      .why-card:nth-child(1) { animation-delay: 100ms; }
+      .why-card:nth-child(2) { animation-delay: 200ms; }
+      .why-card:nth-child(3) { animation-delay: 300ms; }
+      .why-card:nth-child(4) { animation-delay: 400ms; }
+      .why-card:nth-child(5) { animation-delay: 500ms; }
+      .why-card:nth-child(6) { animation-delay: 600ms; }
+      .why-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255,243,109,0.15), transparent 70%);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out);
+        pointer-events: none;
+      }
+      .why-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: var(--elev-4),
+                    inset 0 2px 4px rgba(255,255,255,0.95),
+                    0 0 0 2px rgba(255,243,109,0.5);
+        border-color: rgba(255,243,109,0.7);
+      }
+      .why-card:hover::before { opacity: 1; }
+      .why-icon { 
+        width: 56px; 
+        height: 56px; 
+        margin-bottom: var(--space-6);
+        font-size: 2rem;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(255,243,109,0.2), rgba(255,243,109,0.1));
+        border-radius: var(--radius-lg);
+        box-shadow: 0 4px 12px rgba(255,243,109,0.15);
+        transition: transform 300ms var(--ease-out);
+      }
+      .why-card:hover .why-icon { transform: scale(1.1) rotateY(10deg); }
+      .why-card h3 {
+        color: var(--color-purple);
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
+        margin: 0 0 var(--space-3);
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .why-card p {
+        color: #2a2a2a;
+        font-size: clamp(0.95rem, 1vw, 1rem);
+        line-height: 1.7;
+        margin: 0;
+        font-weight: 500;
+      }
+
+      /* Lifecycle sections */
+      .lifecycle {
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .lifecycle::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        right: -10%;
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(0,168,232,0.05), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 14s ease-in-out infinite;
+        pointer-events: none;
+      }
+      .lifecycle::after {
+        content: '';
+        position: absolute;
+        bottom: -15%;
+        left: -8%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(106,44,145,0.04), transparent 65%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 16s ease-in-out infinite reverse;
+        pointer-events: none;
+      }
+      .lifecycle .container { position: relative; z-index: 2; }
+      .lifecycle-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      @media (min-width: 900px) { .lifecycle-grid { grid-template-columns: repeat(2, 1fr); } }
+      .lifecycle-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.99) 0%, rgba(255,243,109,0.05) 50%, rgba(255,255,255,0.97) 100%);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--elev-3),
+                    inset 0 1px 2px rgba(255,255,255,0.95),
+                    0 0 0 1px rgba(0,168,232,0.15);
+        padding: var(--space-10);
+        border: 2px solid rgba(0,168,232,0.2);
+        transition: all 280ms var(--ease-out);
+        position: relative;
+        overflow: hidden;
+        animation: floatUp 600ms var(--ease-out) both;
+      }
+      .lifecycle-card:nth-child(1) { animation-delay: 100ms; }
+      .lifecycle-card:nth-child(2) { animation-delay: 200ms; }
+      .lifecycle-card:nth-child(3) { animation-delay: 300ms; }
+      .lifecycle-card:nth-child(4) { animation-delay: 400ms; }
+      .lifecycle-card::before {
+        content: '';
+        position: absolute;
+        top: -40%;
+        left: -30%;
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle, rgba(0,168,232,0.12), transparent 70%);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 300ms var(--ease-out);
+        pointer-events: none;
+      }
+      .lifecycle-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: var(--elev-4),
+                    inset 0 2px 4px rgba(255,255,255,0.98),
+                    0 0 0 2px rgba(0,168,232,0.35);
+        border-color: rgba(0,168,232,0.4);
+      }
+      .lifecycle-card:hover::before { opacity: 1; }
+      .lifecycle-card h3 { 
+        color: var(--color-purple);
+        font-size: clamp(1.2rem, 2vw, 1.4rem);
+        margin: 0 0 var(--space-4);
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .lifecycle-card p {
+        color: #2a2a2a;
+        font-size: clamp(0.95rem, 1vw, 1rem);
+        line-height: 1.7;
+        margin: 0;
+        font-weight: 500;
+      }
+      .lifecycle-badge {
+        display: inline-flex;
+        padding: var(--space-3) var(--space-6);
+        background: linear-gradient(135deg, rgba(0,168,232,0.12), rgba(0,168,232,0.06));
+        color: var(--color-teal-blue);
+        border-radius: var(--radius-pill);
+        font-size: clamp(0.8rem, 1vw, 0.9rem);
+        font-weight: 700;
+        border: 1.5px solid rgba(0,168,232,0.25);
+        margin-bottom: var(--space-6);
+        box-shadow: 0 2px 8px rgba(0,168,232,0.1);
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background: linear-gradient(135deg, #ffd940 0%, #ffe082 100%),
+          radial-gradient(circle at 10% 30%, rgba(0,168,232,0.06) 0%, transparent 30%),
+          radial-gradient(circle at 90% 70%, rgba(106,44,145,0.05) 0%, transparent 35%);
+      }
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+      @media (min-width: 900px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+      .testimonial-card {
+        background: var(--color-bg-white);
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(0,0,0,0.06);
+        padding: var(--space-8);
+        box-shadow: var(--elev-1);
+      }
+      .testimonial-quote {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: var(--space-6);
+        color: #555;
+        font-style: italic;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+      .author-avatar {
+        width: 40px; height: 40px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, var(--color-purple), var(--color-teal-blue));
+      }
+      .author-info h4 { margin: 0; font-size: 0.95rem; }
+      .author-role { font-size: 0.85rem; color: #888; margin: 0; }
+
+      /* How it works */
+      .how-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      @media (min-width: 900px) { .how-grid { grid-template-columns: repeat(3, 1fr); } }
+      .how-card {
+        border-radius: var(--radius-lg);
+        background: var(--color-bg-white);
+        border: 1px solid rgba(0,0,0,0.06);
+        padding: var(--space-8);
+        box-shadow: var(--elev-2);
+        position: relative;
+        transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+      }
+      .how-card:hover { transform: translateY(-4px); box-shadow: var(--elev-3); }
+      .how-card.active { box-shadow: var(--elev-3), var(--shadow-glow-teal); border-color: rgba(0,168,232,0.3); }
+      .how-step {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px; height: 44px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, var(--color-teal-blue), var(--color-green));
+        color: white;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin-bottom: var(--space-4);
+      }
+
+      /* FAQ & support */
+      .support-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      @media (min-width: 900px) { .support-grid { grid-template-columns: repeat(2, 1fr); } }
+      .support-card {
+        background: var(--color-bg-white);
+        border-radius: var(--radius-lg);
+        padding: var(--space-8);
+        box-shadow: var(--elev-2);
+        border: 1px solid rgba(0,0,0,0.06);
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, #ffd940 0%, #ffe082 100%),
+          radial-gradient(circle at 10% 30%, rgba(0,168,232,0.06) 0%, transparent 30%),
+          radial-gradient(circle at 90% 70%, rgba(106,44,145,0.05) 0%, transparent 35%);
+        padding: var(--space-20) 0 var(--space-12);
+        position: relative;
+        overflow: hidden;
+        border-top: 3px solid rgba(255,243,109,0.5);
+        perspective: 1200px;
+      }
+      footer::before {
+        content: '';
+        position: absolute;
+        top: -20%;
+        left: -15%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 14s ease-in-out infinite;
+        transform: perspective(1200px) rotateY(20deg) rotateX(-15deg);
+        pointer-events: none;
+      }
+      footer::after {
+        content: '';
+        position: absolute;
+        bottom: -10%;
+        right: -10%;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(0,168,232,0.08), transparent 65%);
+        border-radius: 50%;
+        z-index: 0;
+        animation: float3d 16s ease-in-out infinite reverse;
+        transform: perspective(1200px) rotateY(-22deg) rotateX(18deg);
+        pointer-events: none;
+      }
+      .footer-showcase { display: none; }
+      .footer-products { display: none; }
+      .footer-product-card { display: none; }
+      .footer-inner { 
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        align-items: center;
+        padding-top: var(--space-8);
+        border-top: 2px solid rgba(255,243,109,0.3);
+        color: #555;
+      }
+      /* Main footer content */
+      .footer-content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-12);
+        margin-bottom: var(--space-12);
+        padding-bottom: var(--space-12);
+        border-bottom: 2px solid rgba(255,243,109,0.3);
+      }
+      @media (min-width: 900px) { .footer-content { grid-template-columns: repeat(4, 1fr); gap: var(--space-8); } }
+      
+      /* Footer sections */
+      .footer-section h4 {
+        color: var(--color-purple);
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0 0 var(--space-6);
+        letter-spacing: 0.3px;
+      }
+      .footer-section a {
+        display: block;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: var(--space-3);
+        transition: color 220ms var(--ease-out), transform 220ms var(--ease-out);
+      }
+      .footer-section a:hover { color: var(--color-teal-blue); transform: translateX(4px); }
+      
+      /* Brand section */
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        font-family: "Montserrat";
+        font-weight: 700;
+        color: var(--color-purple);
+        font-size: 1.3rem;
+      }
+      .footer-logo-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, var(--color-primary-yellow), var(--color-teal-blue));
+        box-shadow: var(--elev-2);
+      }
+      .footer-address {
+        font-size: 0.95rem;
+        color: #333;
+        font-weight: 500;
+        line-height: 1.7;
+      }
+      .footer-address p { margin: 0 0 var(--space-2); }
+      
+      /* Subscribe section */
+      .footer-subscribe {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+      .subscribe-form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+      }
+      .subscribe-form input {
+        padding: var(--space-4) var(--space-6);
+        border-radius: var(--radius-lg);
+        border: 2px solid rgba(0,168,232,0.3);
+        background: rgba(255,255,255,0.95);
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 220ms var(--ease-out);
+      }
+      .subscribe-form input:focus {
+        outline: none;
+        border-color: rgba(0,168,232,0.6);
+        box-shadow: 0 0 0 3px rgba(0,168,232,0.15);
+      }
+      .subscribe-form button {
+        padding: var(--space-4) var(--space-6);
+        background: linear-gradient(135deg, var(--color-teal-blue), #0fb5ef);
+        color: white;
+        border: none;
+        border-radius: var(--radius-lg);
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 220ms var(--ease-out);
+        box-shadow: var(--elev-2);
+      }
+      .subscribe-form button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--elev-3);
+      }
+      .subscribe-text {
+        font-size: 0.85rem;
+        color: #555;
+        font-weight: 500;
+      }
+      
+      /* Social media */
+      .footer-social {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+      }
+      .social-icons {
+        display: flex;
+        gap: var(--space-4);
+        flex-wrap: wrap;
+      }
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, rgba(0,168,232,0.2), rgba(106,44,145,0.1));
+        border: 2px solid rgba(0,168,232,0.3);
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 240ms var(--ease-out);
+        text-decoration: none;
+      }
+      .social-icon:hover {
+        transform: translateY(-4px) scale(1.05);
+        background: linear-gradient(135deg, rgba(0,168,232,0.35), rgba(106,44,145,0.2));
+        border-color: rgba(0,168,232,0.6);
+        box-shadow: var(--elev-2);
+      }
+      
+      /* Footer bottom */
+      .footer-bottom {
+        position: relative;
+        z-index: 2;
+        padding-top: var(--space-8);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        text-align: center;
+        color: #555;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      @media (min-width: 900px) { .footer-bottom { grid-template-columns: 1fr auto; text-align: left; } }
+      .footer-bottom a { color: #333; text-decoration: none; font-weight: 600; transition: color 220ms var(--ease-out); }
+      .footer-bottom a:hover { color: var(--color-teal-blue); }
+      .footer-links { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+
+      @keyframes floatUp {
+        from { transform: translateY(2px); opacity: 0.98; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      .product-showcase, .why-card, .lifecycle-card, .how-card { animation: floatUp 500ms var(--ease-out) both; }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+        .product-showcase:hover, .why-card:hover, .lifecycle-card:hover, .how-card:hover, .btn:hover { transform: none !important; }
+      }
+
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- Sticky header -->
+    <div class="header-wrap">
+      <header class="header container">
+        <div class="brand">
+          <div class="logo-mark" aria-hidden="true"></div>
+          <div class="logo">Khushi</div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="#products">Products</a>
+          <a href="#why">Why Khushi</a>
+          <a href="#lifecycle">Your Health</a>
+          <a href="#how">How it works</a>
+          <a href="#testimonials">Stories</a>
+        </nav>
+        <button class="lang-toggle" id="langToggle" aria-pressed="false" aria-label="Toggle language">
+          <span>EN</span>
+          <span>／</span>
+          <span class="hi">हिन्दी</span>
+        </button>
+      </header>
+    </div>
+
+    <!-- Hero section: emotionally resonant messaging -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <!-- Mobile: text card only -->
+        <div class="hero-card">
+          <h1 class="en">Your reproductive health,<br/>on your terms</h1>
+          <h1 class="hi">आपके स्वास्थ्य, आपके नियम</h1>
+          <p class="en">From your period to contraception, pregnancy, and beyond—Khushi gives you safe, trusted options with the care and clarity you deserve. For you and the people who support you.</p>
+          <p class="hi">आपके माहवारी से लेकर गर्भनिरोधक, गर्भावस्था और उसके बाद तक—खुशी आपको सुरक्षित, विश्वसनीय विकल्प देता है जिस देखभाल और स्पष्टता के आप हकदार हैं।</p>
+          <div class="hero-actions">
+            <a class="btn" href="#products">Explore all products</a>
+            <a class="btn secondary" href="#why">Why trust Khushi</a>
+          </div>
+        </div>
+
+        <!-- Desktop: product gallery -->
+        <div class="hero-product">
+          <!-- Left: Thumbnails -->
+          <div class="gallery-thumbs" id="galleryThumbs">
+            <div class="gallery-thumb active" data-product="napkins" title="Sanitary Napkins">
+              <img src="images/pads.jpg" alt="Sanitary Napkins">
+            </div>
+            <div class="gallery-thumb" data-product="pills" title="Oral Pills">
+              <img src="images/oral.jpg" alt="Oral Pills">
+            </div>
+            <div class="gallery-thumb" data-product="mtkit" title="MT Kit">
+              <img src="images/kushimt.png" alt="MT Kit">
+            </div>
+            <div class="gallery-thumb" data-product="pregnancy" title="Pregnancy Test">
+              <img src="images/pregnancykit.jpg" alt="Pregnancy Test">
+            </div>
+          </div>
+
+          <!-- Center: Main image (single, only active one shows) -->
+          <div class="gallery-main">
+            <div class="gallery-image active" data-product="napkins">
+              <img src="images/pads.jpg" alt="Khushi Sanitary Napkins">
+            </div>
+            <div class="gallery-image" data-product="pills">
+              <img src="images/oral.jpg" alt="Khushi Oral Contraceptive Pills">
+            </div>
+            <div class="gallery-image" data-product="mtkit">
+              <img src="images/kushimt.png" alt="Khushi MT Kit">
+            </div>
+            <div class="gallery-image" data-product="pregnancy">
+              <img src="images/pregnancykit.jpg" alt="Khushi Pregnancy Test">
+            </div>
+          </div>
+
+          <!-- Right: Content banner (yellow background) -->
+          <div class="gallery-content" id="galleryContent">
+            <h2 class="en">Sanitary Napkins</h2>
+            <h2 class="hi">सेनिटरी नैपकिन</h2>
+            <p class="en">Premium comfort, superior absorbency, and complete protection. Our redesigned pads feature superior materials for everyday confidence.</p>
+            <p class="hi">अधिकतम सुविधा, बेहतर सोख क्षमता, और संपूर्ण सुरक्षा।</p>
+            <div class="gallery-badges">
+              <span class="gallery-badge">Every Month</span>
+              <span class="gallery-badge">100% Premium</span>
+              <span class="gallery-badge">All-Day Comfort</span>
+            </div>
+            <div class="gallery-cta">
+              <a class="btn" href="#products">Learn More</a>
+              <a class="btn secondary" href="#why">See all 4</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Portfolio Banner - STUNNING DESIGN -->
+    <section id="products" class="portfolio">
+      <div class="container">
+        <div class="portfolio-hero">
+          <div class="portfolio-copy">
+            <p class="en" style="text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: var(--color-teal-blue);">Complete reproductive care</p>
+            <p class="hi" style="text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: var(--color-teal-blue);">पूर्ण प्रजनन देखभाल</p>
+            <h2 class="en">All four essentials, one trusted brand</h2>
+            <h2 class="hi">चारों जरूरी समाधान, एक भरोसेमंद ब्रांड</h2>
+            <p class="en">From monthly care to critical decisions—Khushi delivers pads, pills, MT kit, and pregnancy tests with medical clarity and calm support.</p>
+            <p class="hi">मासिक देखभाल से लेकर महत्वपूर्ण निर्णय तक—पैड, गोली, एमटी किट और प्रेग्नेंसी टेस्ट, सब कुछ स्पष्ट मार्गदर्शन के साथ।</p>
+            <div class="portfolio-chip-row">
+              <div class="portfolio-chip">
+                <span class="icon">🩸</span>
+                <div><span class="en">Sanitary Napkins</span> <span class="hi">/ सेनेटरी नैपकिन</span></div>
+              </div>
+              <div class="portfolio-chip">
+                <span class="icon">⭕</span>
+                <div><span class="en">Oral Contraceptive Pills</span> <span class="hi">/ गर्भनिरोधक गोली</span></div>
+              </div>
+              <div class="portfolio-chip">
+                <span class="icon">💊</span>
+                <div><span class="en">MT Kit</span> <span class="hi">/ एमटी किट</span></div>
+              </div>
+              <div class="portfolio-chip">
+                <span class="icon">✓</span>
+                <div><span class="en">Pregnancy Test</span> <span class="hi">/ प्रेग्नेंसी टेस्ट</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-stack" aria-label="Khushi product stack">
+            <article class="stack-card stack-napkins">
+              <span class="stack-badge">Every Month</span>
+              <h3>Sanitary Napkins</h3>
+              <p>Premium comfort and protection with breathable, day-long confidence.</p>
+            </article>
+            <article class="stack-card stack-pills">
+              <span class="stack-badge">Reversible Control</span>
+              <h3>Oral Pills</h3>
+              <p>Reliable daily choice with clear, jargon-free guidance.</p>
+            </article>
+            <article class="stack-card stack-mtkit">
+              <span class="stack-badge">Medical Grade</span>
+              <h3>MT Kit</h3>
+              <p>Trusted regimen with support at every step of the process.</p>
+            </article>
+            <article class="stack-card stack-pregnancy">
+              <span class="stack-badge">Early Detection</span>
+              <h3>Pregnancy Test</h3>
+              <p>Accurate, fast results for timely decisions.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Khushi: Trust & Values -->
+    <section id="why">
+      <div class="container">
+        <h2 class="section-title en">Why women & partners choose Khushi</h2>
+        <h2 class="section-title hi">महिलाएं और उनके साथी खुशी को क्यों चुनते हैं</h2>
+        <div class="why-grid">
+          <article class="why-card">
+            <div class="why-icon">🔒</div>
+            <h3>Privacy First</h3>
+            <p class="en">Discreet packaging, confidential care. Your journey is yours alone.</p>
+            <p class="hi">गोपनीय पैकेजिंग, निजी देखभाल। आपकी यात्रा आपकी है।</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon">👩‍⚕️</div>
+            <h3>Medically Backed</h3>
+            <p class="en">All products meet clinical standards. You're in safe hands.</p>
+            <p class="hi">सभी उत्पाद चिकित्सा मानकों को पूरा करते हैं।</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon">💬</div>
+            <h3>Clear Guidance</h3>
+            <p class="en">Simple, jargon-free steps you can follow with confidence.</p>
+            <p class="hi">सरल, समझने में आसान निर्देश।</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon">🤝</div>
+            <h3>Support Always</h3>
+            <p class="en">Access to verified medical support lines whenever you need it.</p>
+            <p class="hi">जब भी आवश्यकता हो चिकित्सा सहायता के लिए।</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon">❤️</div>
+            <h3>Affordable Care</h3>
+            <p class="en">High-quality products at prices that work for your budget.</p>
+            <p class="hi">सामर्थ्य के साथ उच्च गुणवत्ता।</p>
+          </article>
+          <article class="why-card">
+            <div class="why-icon">🌍</div>
+            <h3>Compassionate</h3>
+            <p class="en">We respect your choices. No judgment, only care.</p>
+            <p class="hi">आपके विकल्पों का सम्मान। कोई निर्णय नहीं, केवल देखभाल।</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lifecycle Sections -->
+    <section id="lifecycle" class="lifecycle">
+      <div class="container">
+        <h2 class="section-title en">Khushi for every stage of life</h2>
+        <h2 class="section-title hi">जीवन के हर चरण के लिए खुशी</h2>
+        <div class="lifecycle-grid">
+          <article class="lifecycle-card">
+            <span class="lifecycle-badge">Every Month</span>
+            <h3>Your Period</h3>
+            <p class="en">From your first period to your last—Khushi sanitary napkins are there for you. Comfort, confidence, and protection every single day.</p>
+            <p class="hi">हर महीने आपके साथ। आराम, आत्मविश्वास और सुरक्षा।</p>
+          </article>
+          <article class="lifecycle-card">
+            <span class="lifecycle-badge">Choice & Control</span>
+            <h3>Contraception</h3>
+            <p class="en">Whether it's daily pills or other methods—take control of your reproductive choices. Reliable, reversible, and on your terms.</p>
+            <p class="hi">आपके विकल्प पर नियंत्रण। विश्वसनीय और उलटने योग्य।</p>
+          </article>
+          <article class="lifecycle-card">
+            <span class="lifecycle-badge">Major Decision</span>
+            <h3>Pregnancy Decisions</h3>
+            <p class="en">Whether you're planning, expecting, or making a different choice—Khushi supports you with trusted information and care every step of the way.</p>
+            <p class="hi">गर्भावस्था के किसी भी निर्णय में खुशी आपके साथ है।</p>
+          </article>
+          <article class="lifecycle-card">
+            <span class="lifecycle-badge">Medical Care</span>
+            <h3>Abortion Care</h3>
+            <p class="en">The MT Kit offers safe, medical abortion care with clear guidance, support channels, and follow-up. You're not alone.</p>
+            <p class="hi">सुरक्षित चिकित्सा देखभाल, स्पष्ट मार्गदर्शन, और समर्थन। आप अकेले नहीं हैं।</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+        <h2 class="section-title en">Real stories from Khushi users</h2>
+        <h2 class="section-title hi">खुशी उपयोगकर्ताओं की असली कहानियाँ</h2>
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <p class="testimonial-quote en">"I was nervous about using MT Kit, but the clear instructions and support made all the difference. Khushi treated me with such care."</p>
+            <p class="testimonial-quote hi">"मुझे एमटी किट का उपयोग करने के बारे में चिंता थी, लेकिन स्पष्ट निर्देशों ने मुझे आत्मविश्वास दिया।"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div class="author-info">
+                <h4>Priya</h4>
+                <p class="author-role">Delhi, India</p>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="testimonial-quote en">"Finally, a brand that gets it. No judgment, just honest products and real support. My partner appreciated how straightforward everything was."</p>
+            <p class="testimonial-quote hi">"आखिरकार, एक ब्रांड जो समझता है। कोई निर्णय नहीं, बस ईमानदार उत्पाद।"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div class="author-info">
+                <h4>Ananya & Rohit</h4>
+                <p class="author-role">Mumbai, India</p>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="testimonial-quote en">"Khushi napkins are my go-to. Quality, comfort, and a brand that actually cares about women's health. Highly recommend."</p>
+            <p class="testimonial-quote hi">"खुशी की पैड्स मेरा पहली पसंद हैं। गुणवत्ता, आराम, और महिलाओं की देखभाल।"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div class="author-info">
+                <h4>Divya</h4>
+                <p class="author-role">Bangalore, India</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how">
+      <div class="container">
+        <h2 class="section-title en">How Khushi Works</h2>
+        <h2 class="section-title hi">खुशी कैसे काम करता है</h2>
+        <div class="how-grid">
+          <article class="how-card active">
+            <div class="how-step">1</div>
+            <h3>Choose Your Product</h3>
+            <p class="en">Browse our full range and pick what's right for you—sanitary napkins, contraception, pregnancy test, or MT Kit.</p>
+            <p class="hi">आपके लिए सही उत्पाद चुनें।</p>
+          </article>
+          <article class="how-card">
+            <div class="how-step">2</div>
+            <h3>Clear Guidance</h3>
+            <p class="en">Follow simple, jargon-free instructions. Read our support materials. You're never confused or alone.</p>
+            <p class="hi">स्पष्ट, सरल निर्देश। हमेशा समर्थन उपलब्ध।</p>
+          </article>
+          <article class="how-card">
+            <div class="how-step">3</div>
+            <h3>Support & Care</h3>
+            <p class="en">Access our verified medical support lines anytime. For aftercare, guidance, or questions—we're here.</p>
+            <p class="hi">चिकित्सा समर्थन हमेशा उपलब्ध।</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support & FAQ -->
+    <!-- <section id="support">
+      <div class="container">
+        <h2 class="section-title en">Support & Resources</h2>
+        <h2 class="section-title hi">सहायता और संसाधन</h2>
+        <div class="support-grid">
+          <article class="support-card">
+            <h3>Medical Support Line</h3>
+            <p class="en">Call or text anytime for verified medical guidance. Our team is here to answer your questions with care and clarity.</p>
+            <p class="hi">चिकित्सा समर्थन के लिए कभी भी कॉल करें।</p>
+          </article>
+          <article class="support-card">
+            <h3>Aftercare & Wellness</h3>
+            <p class="en">Whether it's recovery guidance, nutrition tips, or emotional support—Khushi covers your full journey.</p>
+            <p class="hi">आफ्टरकेयर, पोषण सलाह, और भावनात्मक समर्थन।</p>
+          </article>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <!-- Main Footer Content -->
+        <div class="footer-content">
+          <!-- Brand & Address -->
+          <div class="footer-section footer-brand">
+            <div class="footer-logo">
+              <div class="footer-logo-mark"></div>
+              <span>Khushi</span>
+            </div>
+            <div class="footer-address">
+              <p class="en"><strong>Khushi Healthcare</strong></p>
+              <p class="en">123 Women's Health Avenue<br/>New Delhi, 110001, India</p>
+              <p class="hi"><strong>खुशी हेल्थकेयर</strong></p>
+              <p class="hi">123 महिला स्वास्थ्य एवेन्यू<br/>नई दिल्ली, 110001, भारत</p>
+              <p style="margin-top: var(--space-4); color: var(--color-teal-blue); font-weight: 700;">
+                <span class="en">📞 +91-11-XXXX-XXXX</span>
+                <span class="hi">📞 +91-11-XXXX-XXXX</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <h4 class="en">Quick Links</h4>
+            <h4 class="hi">त्वरित लिंक</h4>
+            <a href="#products" class="en">All Products</a>
+            <a href="#products" class="hi">सभी उत्पाद</a>
+            <a href="#why" class="en">Why Khushi</a>
+            <a href="#why" class="hi">खुशी क्यों</a>
+            <a href="#lifecycle" class="en">Health Journey</a>
+            <a href="#lifecycle" class="hi">स्वास्थ्य यात्रा</a>
+            <a href="#how" class="en">How It Works</a>
+            <a href="#how" class="hi">कैसे काम करता है</a>
+          </div>
+
+          <!-- Support & Resources -->
+          <div class="footer-section">
+            <h4 class="en">Support</h4>
+            <h4 class="hi">समर्थन</h4>
+            <a href="#support" class="en">Medical Support</a>
+            <a href="#support" class="hi">चिकित्सा समर्थन</a>
+            <a href="#" class="en">Aftercare Guide</a>
+            <a href="#" class="hi">पश्चात् देखभाल गाइड</a>
+            <a href="#" class="en">FAQs</a>
+            <a href="#" class="hi">अक्सर पूछे जाने वाले प्रश्न</a>
+            <a href="#" class="en">Contact Us</a>
+            <a href="#" class="hi">हमसे संपर्क करें</a>
+          </div>
+
+          <!-- Subscribe & Social -->
+          <div class="footer-section footer-subscribe">
+            <div>
+              <h4 class="en">Stay Updated</h4>
+              <h4 class="hi">अपडेट रहें</h4>
+              <p class="subscribe-text en">Get health tips and product updates delivered to your inbox.</p>
+              <p class="subscribe-text hi">अपने इनबॉक्स में स्वास्थ्य सुझाव और उत्पाद अपडेट प्राप्त करें।</p>
+            </div>
+            <form class="subscribe-form">
+              <input type="email" placeholder="your@email.com" required/>
+              <button type="submit" class="en">Subscribe</button>
+              <button type="submit" class="hi">सदस्य बनें</button>
+            </form>
+            <div>
+              <h4 class="en">Follow Us</h4>
+              <h4 class="hi">हमें फॉलो करें</h4>
+              <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="Instagram" title="Instagram">📱</a>
+                <a href="#" class="social-icon" aria-label="Facebook" title="Facebook">👍</a>
+                <a href="#" class="social-icon" aria-label="Twitter" title="Twitter">𝕏</a>
+                <a href="#" class="social-icon" aria-label="WhatsApp" title="WhatsApp">💬</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <div>
+            <span class="en">© 2024 Khushi Healthcare. Empowering reproductive health and choice.</span>
+            <span class="hi">© 2024 खुशी हेल्थकेयर। महिला स्वास्थ्य और विकल्प को सशक्त बनाना।</span>
+          </div>
+          <div class="footer-links">
+            <a href="#" class="en">Terms</a>
+            <a href="#" class="en">Privacy Policy</a>
+            <a href="#" class="en">Disclaimer</a>
+            <a href="#" class="hi">नियम</a>
+            <a href="#" class="hi">गोपनीयता नीति</a>
+            <a href="#" class="hi">अस्वीकरण</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const toggle = document.getElementById('langToggle');
+        // Both languages visible simultaneously - button just toggles text emphasis
+        toggle.addEventListener('click', function(){
+          // Update button label to show current emphasis
+          toggle.textContent = toggle.getAttribute('data-toggled') === 'true' ? 'EN / हिन्दी' : 'हिन्दी / EN';
+          toggle.setAttribute('data-toggled', toggle.getAttribute('data-toggled') === 'true' ? 'false' : 'true');
+        });
+        // Initialize button text
+        toggle.textContent = 'EN / हिन्दी';
+      })();
+
+      // Product gallery interactivity
+      (function(){
+        const productData = {
+          napkins: {
+            en: { name: 'Sanitary Napkins', desc: 'Premium comfort, superior absorbency, and complete protection. Our redesigned pads feature superior materials for everyday confidence.' },
+            hi: { name: 'सेनिटरी नैपकिन', desc: 'अधिकतम सुविधा, बेहतर सोख क्षमता, और संपूर्ण सुरक्षा।' },
+            badges: ['Every Month', '100% Premium', 'All-Day Comfort']
+          },
+          pills: {
+            en: { name: 'Oral Contraceptive Pills', desc: 'Reliable, easy-to-use daily pill. Take control of your reproductive choices with consistent, effective protection.' },
+            hi: { name: 'गर्भनिरोधक गोली', desc: 'आसान दैनिक गोली। आपके प्रजनन विकल्पों पर पूर्ण नियंत्रण पाएं।' },
+            badges: ['Reversible Control', 'Easy Daily Use', 'Medical Grade']
+          },
+          mtkit: {
+            en: { name: 'MT Kit', desc: 'Safe, trusted regimen with Mifepristone & Misoprostol. Clear guidance, medical support, and follow-up care at every step.' },
+            hi: { name: 'एमटी किट', desc: 'सुरक्षित, विश्वसनीय प्रक्रिया। हर कदम पर स्पष्ट मार्गदर्शन।' },
+            badges: ['Medical Grade', '24/7 Support', 'Clear Guidance']
+          },
+          pregnancy: {
+            en: { name: 'Pregnancy Test Kit', desc: 'Accurate, easy-to-use early detection. Get clear results fast with our reliable, clinically tested kit.' },
+            hi: { name: 'प्रेग्नेंसी टेस्ट किट', desc: 'सटीक, आसान प्रारंभिक पहचान। स्पष्ट और तेज परिणाम पाएं।' },
+            badges: ['Early Detection', '99% Accurate', 'Fast Results']
+          }
+        };
+
+        const thumbs = document.querySelectorAll('.gallery-thumb');
+        const content = document.getElementById('galleryContent');
+        const lang = document.documentElement.className.includes('lang-en') ? 'en' : 'hi';
+
+        thumbs.forEach(thumb => {
+          thumb.addEventListener('click', function(){
+            const product = this.dataset.product;
+
+            // Update active states
+            thumbs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            // Update gallery images
+            document.querySelectorAll('.gallery-image').forEach(img => {
+              img.classList.remove('active');
+              if (img.dataset.product === product) {
+                img.classList.add('active');
+              }
+            });
+
+            // Update right content
+            const data = productData[product];
+            const currentLang = document.documentElement.className.includes('lang-en') ? 'en' : 'hi';
+            const badges = data.badges.map(b => `<span class="gallery-badge">${b}</span>`).join('');
+
+            content.innerHTML = `
+              <h2 class="en">${data.en.name}</h2>
+              <h2 class="hi">${data.hi.name}</h2>
+              <p class="en">${data.en.desc}</p>
+              <p class="hi">${data.hi.desc}</p>
+              <div class="gallery-badges">${badges}</div>
+              <div class="gallery-cta">
+                <a class="btn" href="#products">Learn More</a>
+                <a class="btn secondary" href="#why">See all 4</a>
+              </div>
+            `;
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
