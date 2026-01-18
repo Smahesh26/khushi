@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khushi — Your Choice, Your Privacy, Your Support</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --yellow: #f9d745;
+      --orange: #f79d45;
+      --tangerine: #f1683b;
+      --purple: #6a2c91;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      color: #2f2a28;
+      background: white;
+    }
+
+    h1,h2,h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-60px) translateZ(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) translateZ(40px);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px) translateZ(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) translateZ(-20px);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    /* ---------- LOGO ---------- */
+    .logo-center {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease-out;
+      background: white;
+    }
+
+    .logo-center img {
+      transition: transform 0.3s ease;
+    }
+
+    .logo-center img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    /* ---------- HERO WRAPPER ---------- */
+    .hero-banner-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 100px);
+      width: 100%;
+      perspective: 1400px;
+      background: white;
+    }
+
+    /* ---------- LEFT CONTENT ---------- */
+    .hero-content {
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: white;
+      transform: translateZ(40px);
+      box-shadow:
+        0 35px 70px rgba(0,0,0,0.12),
+        inset -1px 0 6px rgba(0,0,0,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.85);
+      animation: slideInLeft 1s ease-out 0.2s both;
+    }
+
+    .hero-content h2 {
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .hero-content p {
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    /* ---------- RIGHT IMAGE PANEL ---------- */
+    .hero-image-side {
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(-20px);
+      background-image: url("images/hero-banner.jpg"); /* 👈 PUT YOUR IMAGE HERE */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow:
+        inset -16px 0 28px rgba(255,255,255,0.25),
+        inset 10px 0 28px rgba(0,0,0,0.18);
+      animation: slideInRight 1s ease-out 0.3s both;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-image-side:hover {
+      transform: translateZ(-20px) scale(1.02);
+    }
+
+    /* soft overlay for readability */
+    .hero-image-side::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.15),
+        rgba(255,255,255,0.05)
+      );
+    }
+
+    /* ---------- CTA ---------- */
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 28px;
+      animation: fadeInUp 1s ease-out 0.8s both;
+    }
+
+    .cta-btn {
+      flex: 1;
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .35s cubic-bezier(.4,0,.2,1);
+      box-shadow:
+        0 10px 22px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+
+    .cta-btn:hover::before {
+      left: 100%;
+    }
+
+    .cta-btn:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .cta-video {
+      background: linear-gradient(135deg, #f9d745 0%, #f5b837 100%);
+      color: #5a4a00;
+    }
+
+    .cta-video:hover {
+      animation: none;
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.5);
+    }
+
+    .cta-call {
+      background: linear-gradient(135deg, #f79d45 0%, #f1683b 100%);
+      color: #ffffff;
+    }
+
+    .privacy-note {
+      font-size: 13px;
+      color: #5f5f5f;
+      margin-top: 20px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      animation: fadeInUp 1s ease-out 1s both;
+    }
+
+    .privacy-note::before {
+      content: '🔒';
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* ---------- VIDEO SECTION ---------- */
+    .video-section {
+      padding: 80px 64px;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(106, 44, 145, 0.2),
+        transparent
+      );
+    }
+
+    .video-container-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .video-header h2 {
+      font-size: 34px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--purple), var(--tangerine));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .video-header p {
+      font-size: 16px;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* 3D Video Card */
+    .video-3d-wrapper {
+      perspective: 2000px;
+      margin-bottom: 35px;
+    }
+
+    .video-card {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .video-card:hover {
+      transform: rotateY(2deg) rotateX(-2deg) translateZ(20px);
+    }
+
+    .video-frame {
+      position: relative;
+      padding: 16px;
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      border-radius: 24px;
+      box-shadow:
+        0 50px 100px rgba(0, 0, 0, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+      transform: translateZ(0);
+    }
+
+    .video-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 2px;
+      background: linear-gradient(
+        135deg,
+        rgba(249, 215, 69, 0.5),
+        rgba(247, 157, 69, 0.5),
+        rgba(241, 104, 59, 0.5),
+        rgba(106, 44, 145, 0.5)
+      );
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .video-card:hover .video-frame::before {
+      opacity: 1;
+    }
+
+    .video-embed {
+      position: relative;
+      padding-bottom: 45%; /* Smaller video - reduced from 56.25% */
+      height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #000;
+      box-shadow: 
+        inset 0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+    }
+
+    /* Video Info Grid */
+    .video-info-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      margin-top: 35px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+
+    .video-description {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .video-description h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: var(--purple);
+    }
+
+    .video-description p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .video-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .feature-tag {
+      padding: 6px 14px;
+      background: linear-gradient(135deg, #f9d745, #f5b837);
+      color: #5a4a00;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(249, 215, 69, 0.3);
+    }
+
+    .video-cta-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--purple), #8b3cb8);
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(106, 44, 145, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(106, 44, 145, 0.4);
+    }
+
+    .cta-card h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .cta-card p {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+
+    .cta-card button {
+      width: 100%;
+      padding: 14px 24px;
+      background: white;
+      color: var(--purple);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cta-card button:hover {
+      background: #f9d745;
+      color: #5a4a00;
+      transform: scale(1.05);
+    }
+
+    /* Accessibility Badge */
+    .accessibility-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+      border-radius: 12px;
+      border-left: 4px solid #4caf50;
+      font-size: 13px;
+      color: #2e7d32;
+    }
+
+    /* ---------- HELPLINE SECTION ---------- */
+    .helpline-section {
+      padding: 80px 64px;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .helpline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(106, 44, 145, 0.2),
+        transparent
+      );
+    }
+
+    .helpline-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .helpline-header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .helpline-header h2 {
+      font-size: 34px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--purple);
+    }
+
+    .helpline-header p {
+      font-size: 16px;
+      color: #666;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* 3D Helpline Cards Grid */
+    .helpline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+      perspective: 2000px;
+    }
+
+    .helpline-card-3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeInUp 1s ease-out both;
+    }
+
+    .helpline-card-3d:nth-child(1) { animation-delay: 0.2s; }
+    .helpline-card-3d:nth-child(2) { animation-delay: 0.3s; }
+
+    .helpline-card-3d:hover {
+      transform: translateY(-10px) rotateX(5deg);
+    }
+
+    .helpline-card {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .helpline-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(
+        135deg,
+        rgba(249, 215, 69, 0.3),
+        rgba(247, 157, 69, 0.3),
+        rgba(241, 104, 59, 0.3)
+      );
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .helpline-card-3d:hover .helpline-card::before {
+      opacity: 1;
+    }
+
+    .helpline-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--orange), var(--tangerine));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px rgba(241, 104, 59, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .helpline-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--purple);
+    }
+
+    .helpline-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .helpline-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #4caf50, #66bb6a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Main Call Button */
+    .main-call-button {
+      width: 100%;
+      padding: 14px 24px;
+      background: linear-gradient(135deg, var(--orange), var(--tangerine));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(241, 104, 59, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .main-call-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(241, 104, 59, 0.4);
+    }
+
+    /* Large CTA Card */
+    .helpline-cta-large {
+      background: linear-gradient(135deg, var(--purple), #8b3cb8);
+      padding: 50px;
+      border-radius: 24px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 25px 50px rgba(106, 44, 145, 0.3);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .helpline-cta-large::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .helpline-cta-large h3 {
+      font-size: 28px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .helpline-cta-large p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      opacity: 0.95;
+      position: relative;
+    }
+
+    .cta-button-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cta-primary-btn {
+      padding: 16px 40px;
+      background: white;
+      color: var(--purple);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-primary-btn:hover {
+      background: var(--yellow);
+      color: #5a4a00;
+      transform: scale(1.05);
+    }
+
+    .cta-secondary-btn {
+      padding: 16px 40px;
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cta-secondary-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+    }
+
+    /* Sticky Mobile Button */
+    .sticky-helpline-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 16px 28px;
+      background: linear-gradient(135deg, var(--orange), var(--tangerine));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(241, 104, 59, 0.4);
+      display: none;
+      align-items: center;
+      gap: 10px;
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .sticky-helpline-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(241, 104, 59, 0.5);
+    }
+
+    /* ---------- FAQ SECTION ---------- */
+    .faq-section {
+      padding: 80px 64px;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faq-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(106, 44, 145, 0.2),
+        transparent
+      );
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .faq-header h2 {
+      font-size: 34px;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--purple);
+    }
+
+    .faq-header p {
+      font-size: 16px;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* FAQ Items */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .faq-item {
+      background: linear-gradient(145deg, #ffffff, #f8f9fa);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease-out both;
+    }
+
+    .faq-item:nth-child(1) { animation-delay: 0.1s; }
+    .faq-item:nth-child(2) { animation-delay: 0.2s; }
+    .faq-item:nth-child(3) { animation-delay: 0.3s; }
+    .faq-item:nth-child(4) { animation-delay: 0.4s; }
+    .faq-item:nth-child(5) { animation-delay: 0.5s; }
+
+    .faq-item:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .faq-question {
+      padding: 24px 28px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: linear-gradient(135deg, rgba(249, 215, 69, 0.1), rgba(247, 157, 69, 0.1));
+    }
+
+    .faq-question h3 {
+      font-size: 18px;
+      margin: 0;
+      color: var(--purple);
+      font-weight: 600;
+    }
+
+    .faq-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #5a4a00;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 28px 24px 28px;
+    }
+
+    .faq-answer p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin: 0;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .site-footer {
+      background: linear-gradient(135deg, var(--purple), #8b3cb8);
+      color: white;
+      padding: 60px 64px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 40px;
+    }
+
+    .footer-about h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .footer-about p {
+      font-size: 15px;
+      line-height: 1.7;
+      opacity: 0.9;
+      margin-bottom: 12px;
+    }
+
+    .footer-section h4 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .emergency-notice {
+      background: rgba(255, 107, 107, 0.2);
+      border-left: 4px solid #ff6b6b;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .emergency-notice strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+      margin: 30px 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .footer-acknowledgement {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .hero-banner-wrapper {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 40px 28px;
+      }
+
+      .hero-image-side {
+        min-height: 300px;
+      }
+
+      .cta-group {
+        flex-direction: column;
+      }
+
+      .video-section {
+        padding: 40px 28px;
+      }
+
+      .video-header h2 {
+        font-size: 32px;
+      }
+
+      .video-frame {
+        padding: 12px;
+      }
+
+      .video-embed {
+        padding-bottom: 56.25%; /* Back to full ratio on mobile */
+      }
+
+      .video-info-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .video-description {
+        padding: 24px;
+      }
+
+      .helpline-section {
+        padding: 40px 28px;
+      }
+
+      .helpline-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .helpline-card {
+        padding: 30px;
+      }
+
+      .helpline-cta-large {
+        padding: 35px 25px;
+      }
+
+      .helpline-cta-large h3 {
+        font-size: 24px;
+      }
+
+      .cta-button-group {
+        flex-direction: column;
+      }
+
+      .cta-primary-btn,
+      .cta-secondary-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .faq-section {
+        padding: 40px 28px;
+      }
+
+      .faq-question {
+        padding: 20px;
+      }
+
+      .faq-question h3 {
+        font-size: 16px;
+      }
+
+      .faq-item.active .faq-answer {
+        padding: 0 20px 20px 20px;
+      }
+
+      .site-footer {
+        padding: 40px 28px 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-legal {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGO -->
+  <div class="logo-center">
+    <img src="images/logo.png" alt="Khushi Logo" style="height: 120px;">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-banner-wrapper">
+
+    <!-- LEFT CONTENT -->
+    <div class="hero-content">
+      <h2 style="font-size: 34px; line-height: 1.3; margin-bottom: 16px;">
+        Your Choice, Your Privacy, Your Support.
+      </h2>
+
+      <p style="font-size: 16px; color: #666; line-height: 1.6;">
+        Get the information or help you need, privately and safely.
+        No judgment, no pressure — just honest support when you need it.
+      </p>
+
+      <div class="cta-group">
+        <button class="cta-btn cta-video">▶ Watch the Video</button>
+        <button class="cta-btn cta-call">📞 Call the Helpline</button>
+      </div>
+
+      <div class="privacy-note">
+        Your privacy is protected. No personal data is collected.
+      </div>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="hero-image-side"></div>
+
+  </div>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section">
+    <div class="video-container-wrapper">
+      
+      <!-- Header -->
+      <div class="video-header">
+        <h2>Understanding Your Options</h2>
+        <p>
+          Watch this video to learn about safe, legal healthcare options and support services available to you.
+        </p>
+      </div>
+
+      <!-- 3D Video Card -->
+      <div class="video-3d-wrapper">
+        <div class="video-card">
+          <div class="video-frame">
+            <div class="video-embed">
+              <!-- Replace VIDEO_ID with your YouTube video ID -->
+              <iframe 
+                src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1" 
+                title="Awareness Video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+
+    </div>
+  </section>
+
+  <!-- HELPLINE ACCESS SECTION -->
+  <section class="helpline-section">
+    <div class="helpline-container">
+      
+      <!-- Header -->
+      <div class="helpline-header">
+        <h2>Need Immediate Support?</h2>
+        <p>
+          Our trained counselors are here to help you, 24/7. All calls are completely confidential and judgment-free.
+        </p>
+      </div>
+
+      <!-- Helpline Cards Grid -->
+      <div class="helpline-grid">
+        
+        <!-- Call Card -->
+        <div class="helpline-card-3d">
+          <div class="helpline-card">
+            <div class="helpline-icon">📞</div>
+            <h3>Call Our Helpline</h3>
+            <p>
+              Speak directly with a trained counselor who understands what you're going through.
+            </p>
+            
+            <div class="helpline-features">
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Available 24/7</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Completely confidential</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>No caller ID recorded</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Multi-language support</span>
+              </div>
+            </div>
+
+            <button class="main-call-button" onclick="alert('Connecting to helpline: 1-800-XXX-XXXX')">
+              <span>📞</span>
+              <span>Call Now: 1-800-XXX-XXXX</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Text/Chat Card -->
+        <div class="helpline-card-3d">
+          <div class="helpline-card">
+            <div class="helpline-icon">💬</div>
+            <h3>Text or Chat Online</h3>
+            <p>
+              Prefer to text? Connect with us via SMS or secure online chat for private support.
+            </p>
+            
+            <div class="helpline-features">
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Secure messaging</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>No personal info required</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Save conversation history</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">✓</span>
+                <span>Response within minutes</span>
+              </div>
+            </div>
+
+            <button class="main-call-button" style="background: linear-gradient(135deg, var(--purple), #8b3cb8);" onclick="alert('Opening secure chat...')">
+              <span>💬</span>
+              <span>Start Chat</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Large CTA Card -->
+      <div class="helpline-cta-large">
+        <h3>You Don't Have to Face This Alone</h3>
+        <p>
+          Whether you need information, emotional support, or help finding resources, 
+          we're here for you every step of the way. Your privacy and wellbeing are our top priorities.
+        </p>
+        
+        <div class="cta-button-group">
+          <button class="cta-primary-btn" onclick="alert('Connecting to helpline...')">
+            <span>📞</span>
+            <span>Call Helpline Now</span>
+          </button>
+          <button class="cta-secondary-btn" onclick="alert('Loading resources...')">
+            View All Resources
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="faq-container">
+      
+      <!-- Header -->
+      <div class="faq-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>
+          Find answers to common questions about our services, privacy, and support options.
+        </p>
+      </div>
+
+      <!-- FAQ List -->
+      <div class="faq-list">
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <h3>Is my call really confidential?</h3>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, absolutely. All calls to our helpline are completely confidential. We do not record your phone number, 
+              collect personal information, or share your conversation with anyone. Our counselors are trained to provide 
+              judgment-free support in a safe, private environment.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <h3>What information can you provide?</h3>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              We provide accurate, medically-reviewed information about reproductive healthcare options, your legal rights, 
+              and available support services. Our trained counselors can help you understand your choices, connect you with 
+              resources, and offer emotional support without judgment.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <h3>Is this service available 24/7?</h3>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              Yes, our helpline is available 24 hours a day, 7 days a week. You can call anytime you need support or 
+              information. Our online chat and text services may have specific hours, which will be displayed when you 
+              access those options.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <h3>Do I need to provide my real name?</h3>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              No, you don't need to provide your real name or any identifying information. You can remain completely 
+              anonymous when contacting us. Our goal is to provide support in whatever way makes you feel most comfortable 
+              and safe.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <h3>What languages do you support?</h3>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-answer">
+            <p>
+              We offer support in multiple languages including English, Hindi, and other regional languages. 
+              When you call or chat with us, you can request assistance in your preferred language, and we'll 
+              connect you with an appropriate counselor.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      
+      <div class="footer-content">
+        
+        <!-- About Section -->
+        <div class="footer-about">
+          <h3>Khushi</h3>
+          <p>
+            Providing confidential, judgment-free support and accurate information about reproductive healthcare 
+            options. Your privacy, choice, and wellbeing are our top priorities.
+          </p>
+          <p>
+            All information provided is medically reviewed and complies with current healthcare guidelines.
+          </p>
+
+          <div class="emergency-notice">
+            <strong>⚠️ Emergency Disclaimer</strong>
+            If you are experiencing a medical emergency, please call your local emergency services immediately 
+            or go to the nearest emergency room. This service is for information and support, not emergency medical care.
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#video">Watch Video</a></li>
+            <li><a href="#helpline">Call Helpline</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#resources">Resources</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Disclaimer</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Acknowledgement -->
+      <div class="footer-acknowledgement">
+        <p>
+          This service is provided by [Organization Name] in partnership with healthcare professionals and advocates 
+          committed to reproductive health and rights. All services are provided in accordance with applicable laws and regulations.
+        </p>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div>
+          © 2024 Khushi. All rights reserved. | Your privacy is protected.
+        </div>
+        <div class="footer-legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Sticky Mobile Helpline Button -->
+  <button class="sticky-helpline-btn" onclick="alert('Connecting to helpline...')">
+    <span>📞</span>
+    <span>Call Helpline</span>
+  </button>
+
+  <script>
+    // Add interactive animations on button clicks
+    document.querySelectorAll('.cta-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+      });
+    });
+
+    // Parallax effect on mouse move
+    document.addEventListener('mousemove', (e) => {
+      const heroImage = document.querySelector('.hero-image-side');
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      heroImage.style.transform = `translateZ(-20px) translate(${x}px, ${y}px)`;
+    });
+
+    // Add scroll-triggered animations for video section
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe video section elements
+    document.querySelectorAll('.video-card, .video-info-grid').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(el);
+    });
+
+    // Enhanced 3D tilt effect on video card
+    const videoCard = document.querySelector('.video-card');
+    if (videoCard) {
+      videoCard.addEventListener('mousemove', (e) => {
+        const rect = videoCard.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const rotateY = (x - 0.5) * 10;
+        const rotateX = (y - 0.5) * -10;
+        
+        videoCard.style.transform = `
+          rotateY(${rotateY}deg) 
+          rotateX(${rotateX}deg) 
+          translateZ(20px)
+        `;
+      });
+
+      videoCard.addEventListener('mouseleave', () => {
+        videoCard.style.transform = '';
+      });
+    }
+
+    // Observe helpline section elements
+    document.querySelectorAll('.helpline-card-3d, .helpline-cta-large').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(el);
+    });
+
+    // Enhanced 3D tilt effect on helpline cards
+    document.querySelectorAll('.helpline-card-3d').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const rotateY = (x - 0.5) * 8;
+        const rotateX = (y - 0.5) * -8;
+        
+        card.style.transform = `
+          translateY(-10px)
+          rotateY(${rotateY}deg) 
+          rotateX(${rotateX}deg)
+        `;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // Show/hide sticky button based on scroll
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const stickyBtn = document.querySelector('.sticky-helpline-btn');
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 500) {
+        stickyBtn.style.display = 'flex';
+      } else {
+        stickyBtn.style.display = 'none';
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // FAQ Toggle Function
+    function toggleFAQ(element) {
+      const faqItem = element.parentElement;
+      const wasActive = faqItem.classList.contains('active');
+      
+      // Close all FAQ items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      
+      // Open clicked item if it wasn't active
+      if (!wasActive) {
+        faqItem.classList.add('active');
+      }
+    }
+
+    // Observe FAQ items
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
