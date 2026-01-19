@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Meri Khushi | Your Choice, Your Privacy, Your Support</title>
+
+  <!-- SEO -->
+  <meta name="description" content="A privacy-first digital platform for awareness, guidance, and confidential helpline access." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.merikhushi.org/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #2f2a28;
+      --muted: #5f5a57;
+      --purple: #6a2c91;
+      --yellow: #f9d745;
+      --orange: #f79d45;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--ink);
+
+      /* Unified background */
+      background-image: url("./images/canvas-bg.png");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* =====================
+       HEADER / LOGO
+    ====================== */
+    header {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    header img {
+      height: 130px;
+    }
+
+    /* =====================
+       HERO
+    ====================== */
+    .hero {
+      min-height: calc(100vh - 150px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      max-width: 780px;
+      text-align: center;
+    }
+
+    .hero-content h1 {
+      font-size: 46px;
+      line-height: 1.25;
+      margin-bottom: 22px;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .cta-group,
+    .video-cta-group,
+    .support-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 38px;
+      min-height: 48px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+      background-size: 200% 100%;
+      background-position: 0 0;
+      box-shadow: 0 16px 28px rgba(106, 44, 145, 0.28);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, background-position 0.4s ease;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: inherit;
+      background: linear-gradient(120deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+      opacity: 0.6;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 36px rgba(106, 44, 145, 0.32);
+      filter: brightness(1.03);
+      background-position: 100% 0;
+    }
+
+    .btn:hover::after {
+      opacity: 0.85;
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(106, 44, 145, 0.28);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid rgba(249, 215, 69, 0.6);
+      outline-offset: 3px;
+    }
+
+    .privacy-note {
+      font-size: 13px;
+      color: #6b6b6b;
+    }
+
+    /* =====================
+       VIDEO SECTION
+    ====================== */
+    .video-section {
+      padding: 70px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-wrapper {
+      max-width: 920px;
+      text-align: center;
+    }
+
+    .video-title {
+      font-size: 38px;
+      margin-bottom: 16px;
+    }
+
+    .video-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .video-card {
+      border-radius: 28px;
+      padding: 18px;
+      background: rgba(255,255,255,0.85);
+      box-shadow:
+        0 40px 80px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      margin-bottom: 30px;
+    }
+
+    .video-embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+    }
+
+    .video-cta-group {
+      gap: 16px;
+    }
+
+    /* =====================
+       MOBILE
+    ====================== */
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+        background-size: 180%;
+      }
+
+      header img {
+        height: 100px;
+      }
+
+      .hero-content h1 {
+        font-size: 34px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+
+      .cta-group,
+      .video-cta-group,
+      .support-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .video-title {
+        font-size: 30px;
+      }
+    }
+    /* =====================
+       SUPPORT CTA
+    ===================== */
+    .support-cta {
+      padding: 70px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .support-wrapper {
+      max-width: 720px;
+      text-align: center;
+    }
+
+    .support-title {
+      font-size: 36px;
+      margin-bottom: 18px;
+    }
+
+    .support-text {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .support-buttons .btn {
+      min-width: 180px;
+    }
+
+    .support-note {
+      font-size: 13px;
+      color: #6b6b6b;
+    }
+
+    @media (max-width: 768px) {
+      .support-title {
+        font-size: 30px;
+      }
+
+      .support-text {
+        font-size: 16px;
+      }
+    }
+/* =====================
+   WHY KHUSHI MT KIT
+===================== */
+.why-khushi {
+  padding: 70px 20px 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.why-wrapper {
+  max-width: 1100px;
+  text-align: center;
+}
+
+/* Headings */
+.why-title {
+  font-size: 38px;
+  margin-bottom: 16px;
+}
+
+.why-subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 50px;
+  line-height: 1.6;
+}
+
+/* Cards layout */
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+/* Individual card */
+.why-card {
+  padding: 36px 30px;
+  text-align: left;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.55); /* blends into canvas */
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: all 0.3s ease;
+}
+
+/* Hover = subtle lift */
+.why-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.12);
+}
+
+/* Card headings */
+.why-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+/* Card text */
+.why-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4f4b48;
+}
+
+/* Accent borders */
+.why-card.yellow {
+  border-top: 4px solid var(--yellow);
+}
+
+.why-card.orange {
+  border-top: 4px solid var(--orange);
+}
+
+.why-card.purple {
+  border-top: 4px solid var(--purple);
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .why-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .why-title {
+    font-size: 32px;
+  }
+
+  .why-subtitle {
+    font-size: 16px;
+    margin-bottom: 50px;
+  }
+}
+/* =====================
+   FAQ SECTION
+===================== */
+.faq-section {
+  padding: 70px 20px 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.faq-wrapper {
+  max-width: 820px;
+  width: 100%;
+}
+
+/* Headings */
+.faq-title {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 16px;
+}
+
+.faq-subtitle {
+  text-align: center;
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto 45px;
+  line-height: 1.6;
+}
+
+/* FAQ List */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Individual item */
+.faq-item {
+  border-radius: 18px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow:
+    0 28px 60px rgba(0,0,0,0.12);
+}
+
+/* Question button */
+.faq-question {
+  width: 100%;
+  padding: 22px 26px;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: left;
+}
+
+.faq-question span:first-child {
+  max-width: 90%;
+}
+
+/* Icon */
+.faq-icon {
+  font-size: 22px;
+  color: var(--purple);
+  transition: transform 0.3s ease;
+}
+
+/* Answer */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 26px;
+}
+
+.faq-answer p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4f4b48;
+  margin: 0;
+}
+
+/* Active */
+.faq-item.active .faq-answer {
+  max-height: 220px;
+  padding: 0 26px 22px;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .faq-title {
+    font-size: 32px;
+  }
+
+  .faq-subtitle {
+    font-size: 16px;
+  }
+}
+/* =====================
+   FOOTER
+===================== */
+.site-footer {
+  padding: 70px 20px 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-wrapper {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Logo */
+.footer-logo img {
+  height: 110px;
+  margin-bottom: 30px;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.footer-links a {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--purple);
+  text-decoration: none;
+  position: relative;
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--purple);
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* Divider */
+.footer-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+
+/* Text */
+.footer-text p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #5f5a57;
+  max-width: 720px;
+  margin: 0 auto 16px;
+}
+
+.emergency-note {
+  font-size: 13px;
+  color: #6b6b6b;
+}
+
+/* Bottom */
+.footer-bottom {
+  margin-top: 28px;
+  font-size: 13px;
+  color: #8a8784;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footer-logo img {
+    height: 90px;
+  }
+
+  .footer-links {
+    gap: 18px;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="./images/logo.png" alt="Khushi Logo">
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="hero-content">
+      <h1>Your Choice, Your Privacy, Your Support.</h1>
+
+      <p>
+        Access information or immediate help — privately, safely,
+        and without judgment or pressure.
+      </p>
+
+      <div class="cta-group">
+        <button class="btn">▶ Watch the Video</button>
+        <button class="btn">📞 Call the Helpline</button>
+      </div>
+
+      <div class="privacy-note">
+        🔒 No personal data is collected. Your privacy always comes first.
+      </div>
+    </div>
+  </main>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section">
+    <div class="video-wrapper">
+
+      <h2 class="video-title">Understand Your Options</h2>
+
+      <p class="video-subtitle">
+        A short awareness video designed to inform and guide —
+        without pressure or direction.
+      </p>
+
+      <div class="video-card">
+        <div class="video-embed">
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
+            title="Khushi Awareness Video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+<!-- =====================
+     SUPPORT CTA SECTION
+===================== -->
+<section class="support-cta">
+
+  <div class="support-wrapper">
+
+    <h2 class="support-title">
+      Need Support Right Now?
+    </h2>
+
+    <p class="support-text">
+      If you’d prefer to speak to someone or chat privately,
+      our trained counselors are available to help — without judgment.
+    </p>
+
+    <div class="support-buttons">
+      <button class="btn">📞 Call Now</button>
+
+      <button class="btn">💬 Chat Now</button>
+    </div>
+
+    <p class="support-note">
+      Available 24/7 • Confidential • No personal data required
+    </p>
+
+  </div>
+
+</section>
+<!-- =====================
+     WHY KHUSHI MT KIT
+===================== -->
+<section class="why-khushi">
+
+  <div class="why-wrapper">
+
+    <h2 class="why-title">
+      Why the Khushi MT Kit?
+    </h2>
+
+    <p class="why-subtitle">
+      Designed to support informed choice, privacy, and timely guidance — without pressure.
+    </p>
+
+    <div class="why-cards">
+
+      <!-- Card 1 -->
+      <div class="why-card yellow">
+        <h3>Private & Respectful</h3>
+        <p>
+          The Khushi MT Kit is designed with complete respect for privacy.
+          No personal data is collected, stored, or shared at any stage.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="why-card orange">
+        <h3>Clear, Factual Guidance</h3>
+        <p>
+          Information is presented in a simple, medically reviewed manner,
+          helping individuals understand their options clearly and calmly.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="why-card purple">
+        <h3>Support When You Need It</h3>
+        <p>
+          Alongside information, access trained counselors through the helpline
+          for guidance, reassurance, and next steps — if and when you choose.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =====================
+     FAQ SECTION
+===================== -->
+<section class="faq-section">
+
+  <div class="faq-wrapper">
+
+    <h2 class="faq-title">
+      Frequently Asked Questions
+    </h2>
+
+    <p class="faq-subtitle">
+      Answers to common questions about privacy, support, and accessing information.
+    </p>
+
+    <div class="faq-list">
+
+      <!-- FAQ 1 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Is my privacy protected when using this site?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes. This platform is designed to be privacy-first. No personal data is collected,
+            stored, or tracked when you browse the site or watch the awareness video.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Do I need to share my name or details to get help?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            No. You are not required to share your name or any identifying information
+            to access information or speak with the helpline.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Is the information provided medically reviewed?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes. All information is carefully reviewed and presented in a factual,
+            non-directive manner to support informed understanding.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>When should I consider calling the helpline?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            You can call the helpline at any stage if you need clarification,
+            reassurance, or guidance. The choice to reach out is entirely yours.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFAQ(this)">
+          <span>Is this service available at all times?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes. The helpline is available 24/7 to ensure support is accessible
+            whenever it is needed.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =====================
+     SITE FOOTER
+===================== -->
+<footer class="site-footer">
+
+  <div class="footer-wrapper">
+
+    <!-- Logo -->
+    <div class="footer-logo">
+      <img src="./images/logo.png" alt="Khushi Logo">
+    </div>
+
+    <!-- Footer Links -->
+    <nav class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Disclaimer</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Footer Text -->
+    <div class="footer-text">
+      <p>
+        Khushi is a privacy-first digital platform designed to provide awareness,
+        guidance, and access to confidential support. No personal data is collected
+        or stored through this website.
+      </p>
+
+      <p class="emergency-note">
+        <strong>Emergency Disclaimer:</strong>
+        If you are facing a medical emergency or are in immediate danger,
+        please contact your local emergency services right away.
+      </p>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © <span id="year"></span> MeriKhushi.org · All rights reserved
+    </div>
+
+  </div>
+
+</footer>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

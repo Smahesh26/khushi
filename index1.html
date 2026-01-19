@@ -6,6 +6,8 @@
   <title>Khushi — Your Choice, Your Privacy, Your Support</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.fog.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +23,15 @@
 
     * { box-sizing: border-box; }
 
+    html {
+      background: radial-gradient(circle at top left, #fbe3d6 0%, #f8d7e5 50%, #f6e7f0 100%);
+    }
+
     body {
       margin: 0;
       font-family: 'DM Sans', system-ui, sans-serif;
       color: #2f2a28;
-      background: white;
+      background: transparent;
     }
 
     h1,h2,h3 {
@@ -88,7 +94,7 @@
       align-items: center;
       justify-content: center;
       animation: fadeInUp 0.8s ease-out;
-      background: white;
+      background: linear-gradient(135deg, #fbe3d6 0%, #f8d7e5 55%, #f6e7f0 100%);
     }
 
     .logo-center img {
@@ -103,7 +109,7 @@
     .hero-banner-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 100px);
+      min-height: calc(100vh - 120px);
       width: 100%;
       perspective: 1400px;
       background: white;
@@ -137,7 +143,10 @@
       position: relative;
       overflow: hidden;
       transform: translateZ(-20px);
-      background-image: url("images/hero-banner.jpg"); /* 👈 PUT YOUR IMAGE HERE */
+      background-image:
+        linear-gradient(135deg, rgba(250, 222, 205, 0.9), rgba(246, 231, 240, 0.75)),
+        url("images/26.jpg"),
+        url("images/25.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -485,566 +494,6 @@
       color: #2e7d32;
     }
 
-    /* ---------- HELPLINE SECTION ---------- */
-    .helpline-section {
-      padding: 80px 64px;
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .helpline-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(106, 44, 145, 0.2),
-        transparent
-      );
-    }
-
-    .helpline-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .helpline-header {
-      text-align: center;
-      margin-bottom: 50px;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .helpline-header h2 {
-      font-size: 34px;
-      line-height: 1.3;
-      margin-bottom: 16px;
-      color: var(--purple);
-    }
-
-    .helpline-header p {
-      font-size: 16px;
-      color: #666;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* 3D Helpline Cards Grid */
-    .helpline-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-bottom: 40px;
-      perspective: 2000px;
-    }
-
-    .helpline-card-3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      animation: fadeInUp 1s ease-out both;
-    }
-
-    .helpline-card-3d:nth-child(1) { animation-delay: 0.2s; }
-    .helpline-card-3d:nth-child(2) { animation-delay: 0.3s; }
-
-    .helpline-card-3d:hover {
-      transform: translateY(-10px) rotateX(5deg);
-    }
-
-    .helpline-card {
-      background: linear-gradient(145deg, #ffffff, #f8f9fa);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .helpline-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 2px;
-      background: linear-gradient(
-        135deg,
-        rgba(249, 215, 69, 0.3),
-        rgba(247, 157, 69, 0.3),
-        rgba(241, 104, 59, 0.3)
-      );
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .helpline-card-3d:hover .helpline-card::before {
-      opacity: 1;
-    }
-
-    .helpline-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, var(--orange), var(--tangerine));
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 25px rgba(241, 104, 59, 0.3);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .helpline-card h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-      color: var(--purple);
-    }
-
-    .helpline-card p {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #555;
-      margin-bottom: 24px;
-    }
-
-    .helpline-features {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: #666;
-    }
-
-    .feature-icon {
-      width: 24px;
-      height: 24px;
-      background: linear-gradient(135deg, #4caf50, #66bb6a);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-
-    /* Main Call Button */
-    .main-call-button {
-      width: 100%;
-      padding: 14px 24px;
-      background: linear-gradient(135deg, var(--orange), var(--tangerine));
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 25px rgba(241, 104, 59, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .main-call-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(241, 104, 59, 0.4);
-    }
-
-    /* Large CTA Card */
-    .helpline-cta-large {
-      background: linear-gradient(135deg, var(--purple), #8b3cb8);
-      padding: 50px;
-      border-radius: 24px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 25px 50px rgba(106, 44, 145, 0.3);
-      position: relative;
-      overflow: hidden;
-      animation: fadeInUp 1s ease-out 0.4s both;
-    }
-
-    .helpline-cta-large::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-      animation: pulse 3s ease-in-out infinite;
-    }
-
-    .helpline-cta-large h3 {
-      font-size: 28px;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .helpline-cta-large p {
-      font-size: 16px;
-      margin-bottom: 30px;
-      opacity: 0.95;
-      position: relative;
-    }
-
-    .cta-button-group {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      position: relative;
-    }
-
-    .cta-primary-btn {
-      padding: 16px 40px;
-      background: white;
-      color: var(--purple);
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cta-primary-btn:hover {
-      background: var(--yellow);
-      color: #5a4a00;
-      transform: scale(1.05);
-    }
-
-    .cta-secondary-btn {
-      padding: 16px 40px;
-      background: transparent;
-      color: white;
-      border: 2px solid rgba(255,255,255,0.5);
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .cta-secondary-btn:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: white;
-    }
-
-    /* Sticky Mobile Button */
-    .sticky-helpline-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      padding: 16px 28px;
-      background: linear-gradient(135deg, var(--orange), var(--tangerine));
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(241, 104, 59, 0.4);
-      display: none;
-      align-items: center;
-      gap: 10px;
-      z-index: 1000;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .sticky-helpline-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 40px rgba(241, 104, 59, 0.5);
-    }
-
-    /* ---------- FAQ SECTION ---------- */
-    .faq-section {
-      padding: 80px 64px;
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .faq-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(106, 44, 145, 0.2),
-        transparent
-      );
-    }
-
-    .faq-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .faq-header {
-      text-align: center;
-      margin-bottom: 50px;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .faq-header h2 {
-      font-size: 34px;
-      line-height: 1.3;
-      margin-bottom: 16px;
-      color: var(--purple);
-    }
-
-    .faq-header p {
-      font-size: 16px;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* FAQ Items */
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .faq-item {
-      background: linear-gradient(145deg, #ffffff, #f8f9fa);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-      animation: fadeInUp 1s ease-out both;
-    }
-
-    .faq-item:nth-child(1) { animation-delay: 0.1s; }
-    .faq-item:nth-child(2) { animation-delay: 0.2s; }
-    .faq-item:nth-child(3) { animation-delay: 0.3s; }
-    .faq-item:nth-child(4) { animation-delay: 0.4s; }
-    .faq-item:nth-child(5) { animation-delay: 0.5s; }
-
-    .faq-item:hover {
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-      transform: translateY(-3px);
-    }
-
-    .faq-question {
-      padding: 24px 28px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      transition: background 0.3s ease;
-    }
-
-    .faq-question:hover {
-      background: linear-gradient(135deg, rgba(249, 215, 69, 0.1), rgba(247, 157, 69, 0.1));
-    }
-
-    .faq-question h3 {
-      font-size: 18px;
-      margin: 0;
-      color: var(--purple);
-      font-weight: 600;
-    }
-
-    .faq-icon {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, var(--yellow), var(--orange));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #5a4a00;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 500px;
-      padding: 0 28px 24px 28px;
-    }
-
-    .faq-answer p {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #555;
-      margin: 0;
-    }
-
-    /* ---------- FOOTER ---------- */
-    .site-footer {
-      background: linear-gradient(135deg, var(--purple), #8b3cb8);
-      color: white;
-      padding: 60px 64px 30px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .site-footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 50px;
-      margin-bottom: 40px;
-    }
-
-    .footer-about h3 {
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-
-    .footer-about p {
-      font-size: 15px;
-      line-height: 1.7;
-      opacity: 0.9;
-      margin-bottom: 12px;
-    }
-
-    .footer-section h4 {
-      font-size: 18px;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .footer-links {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links li {
-      margin-bottom: 10px;
-    }
-
-    .footer-links a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
-      opacity: 0.85;
-      transition: opacity 0.3s ease;
-      display: inline-block;
-    }
-
-    .footer-links a:hover {
-      opacity: 1;
-      transform: translateX(5px);
-    }
-
-    .emergency-notice {
-      background: rgba(255, 107, 107, 0.2);
-      border-left: 4px solid #ff6b6b;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .emergency-notice strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-
-    .footer-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.2);
-      margin: 30px 0;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    .footer-legal {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-legal a {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .footer-legal a:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-
-    .footer-acknowledgement {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 20px;
-      font-size: 14px;
-      text-align: center;
-      opacity: 0.9;
-    }
-
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
       .hero-banner-wrapper {
@@ -1088,76 +537,21 @@
       .video-description {
         padding: 24px;
       }
+    }
 
-      .helpline-section {
-        padding: 40px 28px;
-      }
-
-      .helpline-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .helpline-card {
-        padding: 30px;
-      }
-
-      .helpline-cta-large {
-        padding: 35px 25px;
-      }
-
-      .helpline-cta-large h3 {
-        font-size: 24px;
-      }
-
-      .cta-button-group {
-        flex-direction: column;
-      }
-
-      .cta-primary-btn,
-      .cta-secondary-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .faq-section {
-        padding: 40px 28px;
-      }
-
-      .faq-question {
-        padding: 20px;
-      }
-
-      .faq-question h3 {
-        font-size: 16px;
-      }
-
-      .faq-item.active .faq-answer {
-        padding: 0 20px 20px 20px;
-      }
-
-      .site-footer {
-        padding: 40px 28px 20px;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-legal {
-        justify-content: center;
-      }
+    /* ---------- VANILLA FOG ---------- */
+    #vanta-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
     }
   </style>
 </head>
 
 <body>
+
+  <!-- VANTA BACKGROUND -->
+  <div id="vanta-bg"></div>
 
   <!-- LOGO -->
   <div class="logo-center">
@@ -1222,290 +616,94 @@
         </div>
       </div>
 
-  
-
-    </div>
-  </section>
-
-  <!-- HELPLINE ACCESS SECTION -->
-  <section class="helpline-section">
-    <div class="helpline-container">
-      
-      <!-- Header -->
-      <div class="helpline-header">
-        <h2>Need Immediate Support?</h2>
-        <p>
-          Our trained counselors are here to help you, 24/7. All calls are completely confidential and judgment-free.
-        </p>
-      </div>
-
-      <!-- Helpline Cards Grid -->
-      <div class="helpline-grid">
+      <!-- Video Info Grid -->
+      <div class="video-info-grid">
         
-        <!-- Call Card -->
-        <div class="helpline-card-3d">
-          <div class="helpline-card">
-            <div class="helpline-icon">📞</div>
-            <h3>Call Our Helpline</h3>
-            <p>
-              Speak directly with a trained counselor who understands what you're going through.
-            </p>
-            
-            <div class="helpline-features">
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Available 24/7</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Completely confidential</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>No caller ID recorded</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Multi-language support</span>
-              </div>
-            </div>
+        <!-- Description & Features -->
+        <div class="video-description">
+          <h3>What You'll Learn</h3>
+          <p>
+            This video provides comprehensive information about reproductive healthcare options, 
+            your rights, and how to access confidential support services.
+          </p>
+          <p>
+            All information is medically accurate, judgment-free, and designed to help you 
+            make informed decisions that are right for you.
+          </p>
 
-            <button class="main-call-button" onclick="alert('Connecting to helpline: 1-800-XXX-XXXX')">
-              <span>📞</span>
-              <span>Call Now: 1-800-XXX-XXXX</span>
-            </button>
+          <div class="video-features">
+            <span class="feature-tag">🎥 HD Quality</span>
+            <span class="feature-tag">📝 Subtitles Available</span>
+            <span class="feature-tag">♿ Accessible</span>
+            <span class="feature-tag">🌍 Multi-language</span>
+          </div>
+
+          <div class="accessibility-badge" style="margin-top: 24px;">
+            <span style="font-size: 24px;">♿</span>
+            <span>
+              Full transcript and subtitles available for accessibility. 
+              Content reviewed by healthcare professionals.
+            </span>
           </div>
         </div>
 
-        <!-- Text/Chat Card -->
-        <div class="helpline-card-3d">
-          <div class="helpline-card">
-            <div class="helpline-icon">💬</div>
-            <h3>Text or Chat Online</h3>
-            <p>
-              Prefer to text? Connect with us via SMS or secure online chat for private support.
-            </p>
-            
-            <div class="helpline-features">
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Secure messaging</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>No personal info required</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Save conversation history</span>
-              </div>
-              <div class="feature-item">
-                <span class="feature-icon">✓</span>
-                <span>Response within minutes</span>
-              </div>
-            </div>
+        <!-- CTA Sidebar -->
+        <div class="video-cta-sidebar">
+          <div class="cta-card">
+            <h4>📞 Need Support?</h4>
+            <p>Speak with a trained counselor confidentially</p>
+            <button onclick="alert('Connecting to helpline...')">
+              Call Helpline Now
+            </button>
+          </div>
 
-            <button class="main-call-button" style="background: linear-gradient(135deg, var(--purple), #8b3cb8);" onclick="alert('Opening secure chat...')">
-              <span>💬</span>
-              <span>Start Chat</span>
+          <div class="cta-card" style="background: linear-gradient(135deg, var(--orange), var(--tangerine));">
+            <h4>📚 Read More</h4>
+            <p>Access detailed guides and resources</p>
+            <button onclick="alert('Opening resources...')">
+              View Resources
             </button>
           </div>
         </div>
 
       </div>
 
-      <!-- Large CTA Card -->
-      <div class="helpline-cta-large">
-        <h3>You Don't Have to Face This Alone</h3>
-        <p>
-          Whether you need information, emotional support, or help finding resources, 
-          we're here for you every step of the way. Your privacy and wellbeing are our top priorities.
-        </p>
-        
-        <div class="cta-button-group">
-          <button class="cta-primary-btn" onclick="alert('Connecting to helpline...')">
-            <span>📞</span>
-            <span>Call Helpline Now</span>
-          </button>
-          <button class="cta-secondary-btn" onclick="alert('Loading resources...')">
-            View All Resources
-          </button>
-        </div>
-      </div>
-
     </div>
   </section>
-
-  <!-- FAQ SECTION -->
-  <section class="faq-section">
-    <div class="faq-container">
-      
-      <!-- Header -->
-      <div class="faq-header">
-        <h2>Frequently Asked Questions</h2>
-        <p>
-          Find answers to common questions about our services, privacy, and support options.
-        </p>
-      </div>
-
-      <!-- FAQ List -->
-      <div class="faq-list">
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            <h3>Is my call really confidential?</h3>
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>
-              Yes, absolutely. All calls to our helpline are completely confidential. We do not record your phone number, 
-              collect personal information, or share your conversation with anyone. Our counselors are trained to provide 
-              judgment-free support in a safe, private environment.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            <h3>What information can you provide?</h3>
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>
-              We provide accurate, medically-reviewed information about reproductive healthcare options, your legal rights, 
-              and available support services. Our trained counselors can help you understand your choices, connect you with 
-              resources, and offer emotional support without judgment.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            <h3>Is this service available 24/7?</h3>
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>
-              Yes, our helpline is available 24 hours a day, 7 days a week. You can call anytime you need support or 
-              information. Our online chat and text services may have specific hours, which will be displayed when you 
-              access those options.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            <h3>Do I need to provide my real name?</h3>
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>
-              No, you don't need to provide your real name or any identifying information. You can remain completely 
-              anonymous when contacting us. Our goal is to provide support in whatever way makes you feel most comfortable 
-              and safe.
-            </p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">
-            <h3>What languages do you support?</h3>
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-answer">
-            <p>
-              We offer support in multiple languages including English, Hindi, and other regional languages. 
-              When you call or chat with us, you can request assistance in your preferred language, and we'll 
-              connect you with an appropriate counselor.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      
-      <div class="footer-content">
-        
-        <!-- About Section -->
-        <div class="footer-about">
-          <h3>Khushi</h3>
-          <p>
-            Providing confidential, judgment-free support and accurate information about reproductive healthcare 
-            options. Your privacy, choice, and wellbeing are our top priorities.
-          </p>
-          <p>
-            All information provided is medically reviewed and complies with current healthcare guidelines.
-          </p>
-
-          <div class="emergency-notice">
-            <strong>⚠️ Emergency Disclaimer</strong>
-            If you are experiencing a medical emergency, please call your local emergency services immediately 
-            or go to the nearest emergency room. This service is for information and support, not emergency medical care.
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#video">Watch Video</a></li>
-            <li><a href="#helpline">Call Helpline</a></li>
-            <li><a href="#faq">FAQs</a></li>
-            <li><a href="#resources">Resources</a></li>
-          </ul>
-        </div>
-
-        <!-- Legal -->
-        <div class="footer-section">
-          <h4>Legal</h4>
-          <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Disclaimer</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Acknowledgement -->
-      <div class="footer-acknowledgement">
-        <p>
-          This service is provided by [Organization Name] in partnership with healthcare professionals and advocates 
-          committed to reproductive health and rights. All services are provided in accordance with applicable laws and regulations.
-        </p>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <!-- Bottom Bar -->
-      <div class="footer-bottom">
-        <div>
-          © 2024 Khushi. All rights reserved. | Your privacy is protected.
-        </div>
-        <div class="footer-legal">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Accessibility</a>
-        </div>
-      </div>
-
-    </div>
-  </footer>
-
-  <!-- Sticky Mobile Helpline Button -->
-  <button class="sticky-helpline-btn" onclick="alert('Connecting to helpline...')">
-    <span>📞</span>
-    <span>Call Helpline</span>
-  </button>
 
   <script>
+    let vantaInstance;
+
+    function initVanta() {
+      if (vantaInstance) return;
+      if (window.VANTA && window.THREE) {
+        vantaInstance = VANTA.FOG({
+          el: "#vanta-bg",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          highlightColor: 0xffea00,
+          midtoneColor: 0xffae00,
+          lowlightColor: 0x800080,
+          baseColor: 0x367588,
+          blurFactor: 0.36,
+          speed: 0.70,
+          zoom: 2.70
+        });
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', initVanta);
+    window.addEventListener('resize', initVanta);
+    window.addEventListener('unload', () => {
+      if (vantaInstance) {
+        vantaInstance.destroy();
+        vantaInstance = null;
+      }
+    });
+
     // Add interactive animations on button clicks
     document.querySelectorAll('.cta-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -1569,75 +767,6 @@
         videoCard.style.transform = '';
       });
     }
-
-    // Observe helpline section elements
-    document.querySelectorAll('.helpline-card-3d, .helpline-cta-large').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      observer.observe(el);
-    });
-
-    // Enhanced 3D tilt effect on helpline cards
-    document.querySelectorAll('.helpline-card-3d').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-        
-        const rotateY = (x - 0.5) * 8;
-        const rotateX = (y - 0.5) * -8;
-        
-        card.style.transform = `
-          translateY(-10px)
-          rotateY(${rotateY}deg) 
-          rotateX(${rotateX}deg)
-        `;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-
-    // Show/hide sticky button based on scroll
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const stickyBtn = document.querySelector('.sticky-helpline-btn');
-      const currentScroll = window.pageYOffset;
-      
-      if (currentScroll > 500) {
-        stickyBtn.style.display = 'flex';
-      } else {
-        stickyBtn.style.display = 'none';
-      }
-      
-      lastScroll = currentScroll;
-    });
-
-    // FAQ Toggle Function
-    function toggleFAQ(element) {
-      const faqItem = element.parentElement;
-      const wasActive = faqItem.classList.contains('active');
-      
-      // Close all FAQ items
-      document.querySelectorAll('.faq-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      
-      // Open clicked item if it wasn't active
-      if (!wasActive) {
-        faqItem.classList.add('active');
-      }
-    }
-
-    // Observe FAQ items
-    document.querySelectorAll('.faq-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      observer.observe(el);
-    });
   </script>
 
 </body>
