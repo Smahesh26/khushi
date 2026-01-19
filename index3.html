@@ -102,6 +102,42 @@
       flex-wrap: wrap;
     }
 
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .parallax-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-shell::before {
+      content: '';
+      position: absolute;
+      inset: -20%;
+      border-radius: clamp(24px, 8vw, 80px);
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(249,215,69,0.22) 0%, rgba(106,44,145,0.15) 55%, rgba(255,255,255,0) 100%);
+      opacity: 0.65;
+      transform: translate3d(0, var(--parallax-y, 0px), 0) scale(1.1);
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      will-change: transform;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .parallax-shell.is-active::before {
+      opacity: 0.85;
+    }
+
     .btn {
       position: relative;
       display: inline-flex;
@@ -160,6 +196,20 @@
     .btn:focus-visible {
       outline: 3px solid rgba(249, 215, 69, 0.6);
       outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .reveal.is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      .parallax-shell::before {
+        transition: none !important;
+        transform: none !important;
+      }
     }
 
     .privacy-note {
@@ -624,8 +674,8 @@
   </header>
 
   <!-- HERO -->
-  <main class="hero">
-    <div class="hero-content">
+  <main class="hero parallax-shell">
+    <div class="hero-content reveal" data-reveal-delay="0.05s">
       <h1>Your Choice, Your Privacy, Your Support.</h1>
 
       <p>
@@ -645,8 +695,8 @@
   </main>
 
   <!-- VIDEO SECTION -->
-  <section class="video-section">
-    <div class="video-wrapper">
+  <section class="video-section parallax-shell">
+    <div class="video-wrapper reveal" data-reveal-delay="0.05s">
 
       <h2 class="video-title">Understand Your Options</h2>
 
@@ -655,7 +705,7 @@
         without pressure or direction.
       </p>
 
-      <div class="video-card">
+      <div class="video-card reveal" data-reveal-delay="0.15s">
         <div class="video-embed">
           <iframe
             src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1"
@@ -671,9 +721,9 @@
 <!-- =====================
      SUPPORT CTA SECTION
 ===================== -->
-<section class="support-cta">
+<section class="support-cta parallax-shell">
 
-  <div class="support-wrapper">
+  <div class="support-wrapper reveal" data-reveal-delay="0.08s">
 
     <h2 class="support-title">
       Need Support Right Now?
@@ -700,9 +750,9 @@
 <!-- =====================
      WHY KHUSHI MT KIT
 ===================== -->
-<section class="why-khushi">
+<section class="why-khushi parallax-shell">
 
-  <div class="why-wrapper">
+  <div class="why-wrapper reveal" data-reveal-delay="0.05s">
 
     <h2 class="why-title">
       Why the Khushi MT Kit?
@@ -715,7 +765,7 @@
     <div class="why-cards">
 
       <!-- Card 1 -->
-      <div class="why-card yellow">
+      <div class="why-card yellow reveal" data-reveal-delay="0.05s">
         <h3>Private & Respectful</h3>
         <p>
           The Khushi MT Kit is designed with complete respect for privacy.
@@ -724,7 +774,7 @@
       </div>
 
       <!-- Card 2 -->
-      <div class="why-card orange">
+      <div class="why-card orange reveal" data-reveal-delay="0.18s">
         <h3>Clear, Factual Guidance</h3>
         <p>
           Information is presented in a simple, medically reviewed manner,
@@ -733,7 +783,7 @@
       </div>
 
       <!-- Card 3 -->
-      <div class="why-card purple">
+      <div class="why-card purple reveal" data-reveal-delay="0.31s">
         <h3>Support When You Need It</h3>
         <p>
           Alongside information, access trained counselors through the helpline
@@ -749,9 +799,9 @@
 <!-- =====================
      FAQ SECTION
 ===================== -->
-<section class="faq-section">
+<section class="faq-section parallax-shell">
 
-  <div class="faq-wrapper">
+  <div class="faq-wrapper reveal" data-reveal-delay="0.05s">
 
     <h2 class="faq-title">
       Frequently Asked Questions
@@ -764,7 +814,7 @@
     <div class="faq-list">
 
       <!-- FAQ 1 -->
-      <div class="faq-item">
+      <div class="faq-item reveal" data-reveal-delay="0.05s">
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span>Is my privacy protected when using this site?</span>
           <span class="faq-icon">+</span>
@@ -778,7 +828,7 @@
       </div>
 
       <!-- FAQ 2 -->
-      <div class="faq-item">
+      <div class="faq-item reveal" data-reveal-delay="0.12s">
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span>Do I need to share my name or details to get help?</span>
           <span class="faq-icon">+</span>
@@ -792,7 +842,7 @@
       </div>
 
       <!-- FAQ 3 -->
-      <div class="faq-item">
+      <div class="faq-item reveal" data-reveal-delay="0.19s">
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span>Is the information provided medically reviewed?</span>
           <span class="faq-icon">+</span>
@@ -806,7 +856,7 @@
       </div>
 
       <!-- FAQ 4 -->
-      <div class="faq-item">
+      <div class="faq-item reveal" data-reveal-delay="0.26s">
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span>When should I consider calling the helpline?</span>
           <span class="faq-icon">+</span>
@@ -820,7 +870,7 @@
       </div>
 
       <!-- FAQ 5 -->
-      <div class="faq-item">
+      <div class="faq-item reveal" data-reveal-delay="0.33s">
         <button class="faq-question" onclick="toggleFAQ(this)">
           <span>Is this service available at all times?</span>
           <span class="faq-icon">+</span>
@@ -841,9 +891,9 @@
 <!-- =====================
      SITE FOOTER
 ===================== -->
-<footer class="site-footer">
+<footer class="site-footer parallax-shell">
 
-  <div class="footer-wrapper">
+  <div class="footer-wrapper reveal" data-reveal-delay="0.08s">
 
     <!-- Logo -->
     <div class="footer-logo">
@@ -886,7 +936,95 @@
 
 </footer>
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+  (function () {
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    const toggleFAQ = (button) => {
+      const item = button.closest('.faq-item');
+      if (!item) {
+        return;
+      }
+
+      const isOpen = item.classList.contains('active');
+      document.querySelectorAll('.faq-item.active').forEach((activeItem) => {
+        if (activeItem !== item) {
+          activeItem.classList.remove('active');
+        }
+      });
+
+      item.classList.toggle('active', !isOpen);
+    };
+
+    window.toggleFAQ = toggleFAQ;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach((el) => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const sectionElements = document.querySelectorAll('.parallax-shell');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const target = entry.target;
+        const delay = target.dataset.revealDelay;
+        if (delay) {
+          target.style.transitionDelay = delay;
+        }
+
+        target.classList.add('is-visible');
+        observer.unobserve(target);
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -10% 0px'
+    });
+
+    revealElements.forEach((element) => revealObserver.observe(element));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-active');
+        } else {
+          entry.target.classList.remove('is-active');
+        }
+      });
+    }, {
+      threshold: 0.25
+    });
+
+    sectionElements.forEach((section) => sectionObserver.observe(section));
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const updateParallax = () => {
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      sectionElements.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height || 1);
+        const offset = clamp((progress - 0.5) * 90, -42, 42);
+        section.style.setProperty('--parallax-y', `${offset}px`);
+      });
+    };
+
+    updateParallax();
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    window.addEventListener('resize', updateParallax);
+  })();
 </script>
 
 </body>
