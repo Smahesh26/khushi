@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khushi MT Kit</title>
+
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --purple:#6a2c91;
+      --pink:#e3447a;
+      --white:#ffffff;
+      --shadow: 0 80px 160px rgba(0,0,0,0.18), 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+      overflow-y:auto;
+      position:relative;
+
+    .book-hint{
+      position:absolute;
+      top: 18px;
+      right: 6px;
+      width: calc(50% - 12px);
+      height: calc(100% - 36px);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(106,44,145,0.12);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#6a2c91;
+      padding: 24px;
+      transform: translateZ(6px);
+      pointer-events:none;
+      font-family:"Inter",sans-serif;
+      line-height:1.6;
+    }
+    .book-hint .kicker{
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      font-weight:600;
+      font-size:13px;
+      color:#823067;
+      margin-bottom:10px;
+    }
+    .book-hint h2{
+      margin:0 0 10px;
+      font-family:"Playfair Display",serif;
+      font-size: clamp(26px, 2.4vw, 36px);
+      color:#6a2c91;
+    }
+    .book-hint p{
+      margin:0;
+      color:#7a2553;
+    }
+      min-height:100vh;
+      background: linear-gradient(180deg, #fef6fb 0%, #f6c5d7 38%, #f48ab0 68%, #e3447a 100%);
+      color:#4b1840;
+      background-attachment: fixed;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(220px at 12% 20%, rgba(255,255,255,0.32), rgba(255,255,255,0)),
+        radial-gradient(280px at 86% 18%, rgba(255,255,255,0.26), rgba(255,255,255,0)),
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 12px, transparent 12px, transparent 24px);
+      opacity:0.75;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* ============== 3D BACKGROUND LAYER ============== */
+    .bg-3d{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .bg-grid{
+      position:absolute;
+      inset:-20%;
+      opacity:0.22;
+      background:
+        linear-gradient(to right, rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: 54px 54px;
+      transform: perspective(900px) rotateX(55deg) translateY(-120px);
+      filter: blur(0.2px);
+    }
+    .bg-blob{
+      position:absolute;
+      width:520px;
+      height:520px;
+      border-radius:40% 60% 55% 45% / 45% 35% 65% 55%;
+      filter: blur(2px);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.15) 55%, rgba(255,255,255,0));
+      opacity:0.55;
+      mix-blend-mode: soft-light;
+      transform: translate3d(0,0,0);
+    }
+    .bg-blob.b1{ top:-140px; left:-160px; }
+    .bg-blob.b2{ top:70px; right:-220px; width:600px; height:600px; opacity:0.45; }
+    .bg-blob.b3{ bottom:-220px; left:40%; width:700px; height:700px; opacity:0.35; }
+
+    .bg-orb{
+      position:absolute;
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.18) 60%, rgba(255,255,255,0));
+      box-shadow: 0 30px 80px rgba(226, 68, 122, 0.18), inset 0 1px 0 rgba(255,255,255,0.55);
+      opacity:0.55;
+      backdrop-filter: blur(6px);
+    }
+    .bg-orb.o1{ top:22%; left:12%; width:96px; height:96px; }
+    .bg-orb.o2{ top:18%; right:14%; width:140px; height:140px; opacity:0.42; }
+    .bg-orb.o3{ bottom:18%; left:18%; width:110px; height:110px; opacity:0.48; }
+    .bg-orb.o4{ bottom:14%; right:10%; width:92px; height:92px; opacity:0.5; }
+
+    /* ============== PRELOADER ============== */
+    #preloader{
+      position:fixed;
+      inset:0;
+      background:#fff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:3000;
+    }
+    .dots{ display:flex; gap:18px; }
+    .dot{
+      width:18px;height:18px;
+      background: var(--purple);
+      border-radius:50%;
+      box-shadow: 0 12px 24px rgba(106,44,145,0.18);
+      transform: translateZ(0);
+    }
+    .bird{
+      width:120px;
+      position:fixed;
+      top:0;left:0;
+      opacity:0;
+      z-index:3001;
+      pointer-events:none;
+      filter: drop-shadow(0 18px 24px rgba(0,0,0,0.18));
+    }
+
+    /* ============== PALETTE OVERLAY ============== */
+    #palette{
+      position:fixed;
+      left:0; top:0;
+      width:40px; height:40px;
+      border-radius:50%;
+      transform: translate3d(-9999px,-9999px,0) scale(0);
+      transform-origin:center;
+      z-index:2500;
+      pointer-events:none;
+      opacity:0;
+      background:
+        radial-gradient(220px at 25% 25%, rgba(255,255,255,0.65), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, #6a2c91 0%, #a83aa3 22%, #f48ab0 52%, #e3447a 78%, #ffb6c9 100%);
+      box-shadow: 0 50px 160px rgba(0,0,0,0.18);
+    }
+
+    /* ============== HERO ============== */
+    #hero{
+      min-height:100vh;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      perspective: 1600px;
+      position:relative;
+      z-index:1;
+      padding: 26px;
+    }
+
+    .hero-stage{
+      position:relative;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .hero-card{
+      position:relative;
+      background: rgba(255,255,255,0.88);
+      padding: 92px 74px 62px;
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      text-align:center;
+      max-width: 960px;
+      width: min(960px, calc(100vw - 52px));
+      transform-style: preserve-3d;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.55);
+      backdrop-filter: blur(14px);
+      will-change: transform;
+    }
+
+    .hero-card::before{
+      content:'';
+      position:absolute;
+      inset:-45% -30% 55% -30%;
+      background: radial-gradient(circle at top, rgba(234, 89, 143, 0.35), rgba(255,255,255,0));
+      z-index:-1;
+    }
+
+    .hero-shine{
+      position:absolute;
+      inset:-2px;
+      border-radius: 36px;
+      background: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.65), rgba(255,255,255,0.06) 40%, rgba(255,255,255,0) 70%);
+      opacity:0.55;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      transform: translateZ(60px);
+    }
+
+    .hero-logo{
+      position:absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(80px);
+      display:inline-flex;
+      align-items:center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.30);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 36px rgba(226, 68, 122, 0.14);
+      border: 1px solid rgba(255,255,255,0.5);
+      opacity:0;
+    }
+    .hero-logo img{
+      height: 64px;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,0.16));
+    }
+
+    .hero-title{
+      margin: 34px 0 18px;
+      line-height: 1.03;
+      transform: translateZ(70px);
+    }
+    .hero-title span{
+      display:block;
+      font-family:'Playfair Display',serif;
+      font-size: clamp(34px, 4vw, 54px);
+      color: var(--purple);
+      text-shadow: 0 18px 36px rgba(106,44,145,0.14);
+    }
+
+    .hero-subtitle{
+      margin: 0 auto 26px;
+      max-width: 680px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #6e3256;
+      transform: translateZ(54px);
+    }
+
+    .hero-cta{
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      align-items:center;
+      margin-top: 10px;
+      transform: translateZ(60px);
+      flex-wrap:wrap;
+    }
+
+    .hero-cta button{
+      border:0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-weight: 700;
+      cursor:pointer;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .hero-cta .primary{
+      background: linear-gradient(135deg, rgba(106,44,145,1), rgba(227,68,122,1));
+      color:white;
+      box-shadow: 0 22px 46px rgba(106,44,145,0.24);
+    }
+    .hero-cta .secondary{
+      background: rgba(255,255,255,0.55);
+      color: #6a2c91;
+      border: 1px solid rgba(106,44,145,0.22);
+      box-shadow: 0 18px 36px rgba(226, 68, 122, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .support-strip{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+      transform: translateZ(40px);
+    }
+    .support-item{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(241, 160, 193, 0.22), rgba(255, 255, 255, 0.50));
+      color:#8d2b5b;
+      font-size: 14px;
+      font-weight:600;
+      border: 1px solid rgba(234, 108, 156, 0.18);
+      box-shadow: 0 22px 44px rgba(226, 68, 122, 0.12);
+    }
+    .support-icon{
+      background: rgba(255,255,255,0.72);
+      color:#e25086;
+      width: 34px;
+      height: 34px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .scroll-hint{
+      margin-top: 40px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size: 12px;
+      color:#a43a6c;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transform: translateZ(40px);
+      opacity: 0.9;
+    }
+    .scroll-hint svg{
+      width: 22px;
+      height: 22px;
+      fill:none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      animation: hint-bounce 2.6s ease-in-out infinite;
+    }
+    @keyframes hint-bounce{
+      0%,100%{ transform: translateY(0); opacity:0.45; }
+      50%{ transform: translateY(6px); opacity:1; }
+    }
+
+    @media (max-width: 768px){
+      .hero-card{ padding: 82px 28px 54px; border-radius: 30px; }
+      .hero-logo{ top: 22px; padding: 8px 14px; }
+      .hero-logo img{ height: 56px; }
+      .hero-subtitle{ font-size: 16px; }
+      #videoSection{
+        position:static;
+        inset:auto;
+        margin-top:-30px;
+        padding:110px 18px 160px;
+        display:flex;
+        align-items:flex-start;
+        justify-content:center;
+        min-height:auto;
+        opacity:1;
+        transform:none;
+        pointer-events:auto;
+        background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(244,138,176,0.12) 45%, rgba(226,68,122,0.08) 100%);
+      }
+      #videoSection::before{ display:block; }
+    }
+
+    /* ====================== BOOK SECTION ====================== */
+    #bookSection{
+      position:relative;
+      z-index:1;
+    }
+    .pinWrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 28px;
+    }
+    .book-scene{
+      width: min(1000px, 94vw);
+      height: min(590px, 76vh);
+      perspective: 2600px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .book{
+      width: 100%;
+      height: 100%;
+      position:relative;
+      transform-style:preserve-3d;
+      will-change: transform;
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.18));
+    }
+
+    /* Video spotlight section */
+    #videoSection{
+      position:absolute;
+      inset:0;
+      margin:0;
+      padding: 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        linear-gradient(165deg, rgba(106,44,145,0.92) 0%, rgba(166,57,143,0.88) 38%, rgba(227,68,122,0.80) 72%, rgba(255,177,206,0.72) 100%),
+        radial-gradient(circle at 12% 90%, rgba(255,255,255,0.16), rgba(255,255,255,0));
+      overflow:hidden;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:160;
+      opacity:0;
+      transform: translate3d(0, 56%, 0);
+      will-change: transform, opacity;
+    }
+    #videoSection::before{
+      content:"";
+      position:absolute;
+      inset: -120px -40px auto;
+      height: 320px;
+      background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+      pointer-events:none;
+      opacity:0.65;
+    }
+    .video-shell{
+      width:100%;
+      height:100%;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding: 6vh 6vw 5vh;
+    }
+    .video-content{
+      width: min(880px, 88vw);
+      max-height: 100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:center;
+      gap: clamp(32px, 4vw, 54px);
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+    .video-heading{
+      margin:0;
+      max-width: 620px;
+      color:#6a2c91;
+      color:#fff;
+    }
+    .video-heading h2{
+      margin:0 0 10px;
+      font-family:"Playfair Display",serif;
+      font-size: clamp(36px, 4.4vw, 58px);
+      line-height:1.1;
+    }
+    .video-heading p{
+      margin:0;
+      font-size:18px;
+      line-height:1.6;
+      color:rgba(255,255,255,0.82);
+    }
+    .video-frame{
+      width: 100%;
+      max-width: 880px;
+      aspect-ratio: 16 / 9;
+      height: min(52vw, 500px);
+      border-radius: 26px;
+      overflow:hidden;
+      box-shadow:
+        0 50px 160px rgba(0,0,0,0.35),
+        0 20px 40px rgba(0,0,0,0.18);
+      transform-origin:center;
+      background: #000;
+    }
+    .video-frame iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      object-fit:cover;
+    }
+
+    /* Support highlight cards */
+    #supportHighlights{
+      position:relative;
+      padding: 150px 6vw 180px;
+      background: linear-gradient(180deg, rgba(244,138,176,0.12) 0%, rgba(254,246,251,1) 64%, #fff 100%);
+      overflow:hidden;
+    }
+    #supportHighlights::before{
+      content:"";
+      position:absolute;
+      inset:10% 8% auto;
+      height: 320px;
+      background: radial-gradient(circle at 24% 40%, rgba(227,68,122,0.22), rgba(227,68,122,0));
+      pointer-events:none;
+      opacity:0.8;
+      filter: blur(8px);
+    }
+    #supportHighlights::after{
+      content:"";
+      position:absolute;
+      bottom:-180px;
+      left:-25%;
+      width:150%;
+      height:360px;
+      background: radial-gradient(circle at 60% 0%, rgba(106,44,145,0.18), rgba(106,44,145,0));
+      pointer-events:none;
+      opacity:0.5;
+      filter: blur(12px);
+    }
+    .cards-shell{
+      max-width: 1120px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: clamp(22px, 3.2vw, 40px);
+      position:relative;
+      z-index:1;
+      perspective: 1400px;
+      perspective-origin: 50% 32%;
+    }
+    .support-card{
+      position:relative;
+      background: linear-gradient(165deg, rgba(255,255,255,0.96) 0%, rgba(250,233,244,0.86) 100%);
+      border-radius: 26px;
+      padding: 34px 30px;
+      border: 1px solid rgba(138,66,162,0.18);
+      box-shadow: 0 34px 80px rgba(106,44,145,0.16), 0 16px 40px rgba(227,68,122,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+      transform-origin: 50% 0%;
+      transform-style: preserve-3d;
+      transition: transform 0.52s cubic-bezier(.18,.89,.32,1.28), box-shadow 0.52s ease, border-color 0.52s ease;
+      overflow:hidden;
+      backdrop-filter: blur(8px);
+    }
+    .support-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius: inherit;
+      background: linear-gradient(140deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 65%);
+      opacity:0;
+      transition: opacity 0.45s ease;
+      transform: translate3d(0,0,8px);
+      pointer-events:none;
+    }
+    .support-card::after{
+      content:"";
+      position:absolute;
+      inset: 16px 18px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.45);
+      opacity:0.7;
+      pointer-events:none;
+      transform: translate3d(0,0,6px);
+    }
+    .support-card:hover,
+    .support-card:focus-within{
+      transform: translate3d(0,-22px,0) rotateX(7deg) rotateY(-4deg) scale(1.035);
+      box-shadow: 0 44px 140px rgba(106,44,145,0.26), 0 20px 52px rgba(227,68,122,0.16);
+      border-color: rgba(138,66,162,0.32);
+    }
+    .support-card:hover::before,
+    .support-card:focus-within::before{
+      opacity:1;
+    }
+    .support-card .card-icon{
+      position:relative;
+      width: 58px;
+      height: 58px;
+      border-radius: 20px;
+      background: linear-gradient(150deg, rgba(106,44,145,0.28), rgba(227,68,122,0.38));
+      display:grid;
+      place-items:center;
+      font-size: 26px;
+      color:#56255b;
+      box-shadow: 0 22px 36px rgba(106,44,145,0.24), inset 0 1px 0 rgba(255,255,255,0.85);
+      transform: translate3d(0,0,18px);
+    }
+    .support-card .card-icon::after{
+      content:"";
+      position:absolute;
+      inset:6px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.55);
+      opacity:0.9;
+      pointer-events:none;
+    }
+    .support-card h3{
+      margin:0;
+      font-family:"Playfair Display",serif;
+      font-size: 23px;
+      color:#4f224c;
+      line-height:1.22;
+      letter-spacing:0.015em;
+    }
+    .support-card p{
+      margin:0;
+      color:#6a2c6d;
+      line-height:1.7;
+      font-size: 15px;
+    }
+
+    /* Issues stack marquee */
+    #issuesStack{
+      position:relative;
+      padding: 90px 5vw 150px;
+      background: linear-gradient(180deg, #140817 0%, #1c0d23 45%, #140817 100%);
+      overflow:hidden;
+      color:#f7ecf6;
+    }
+    #issuesStack::before{
+      content:"";
+      position:absolute;
+      top:-50%;
+      left:50%;
+      width: 1200px;
+      height:1200px;
+      background: radial-gradient(circle at center, rgba(111,40,136,0.22), rgba(111,40,136,0));
+      transform: translateX(-50%);
+      pointer-events:none;
+      filter: blur(12px);
+    }
+    .issues-heading{
+      max-width: 860px;
+      margin:0 auto;
+      text-align:center;
+      position:relative;
+      top:-12px;
+      transform: translateY(-8px);
+      z-index:1;
+    }
+    .issues-heading .kicker{
+      display:inline-block;
+      padding: 8px 18px;
+      border-radius:18px;
+      background: rgba(227,68,122,0.18);
+      color:#f7d6ea;
+      font-size:12px;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      margin-bottom:16px;
+    }
+    .issues-heading h2{
+      margin: 12px 0 22px;
+      font-size:42px;
+      line-height:1.1;
+      font-family:"Playfair Display",serif;
+      color:#ffeefc;
+    }
+    .issues-heading p{
+      margin:0;
+      font-size:18px;
+      line-height:1.6;
+      color:rgba(247,236,246,0.82);
+    }
+    .issues-marquee{
+      position:relative;
+      max-width: 1200px;
+      margin:0 auto;
+      height: min(76vh, 760px);
+      overflow:hidden;
+      padding: 0;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(56,17,68,0.72) 0%, rgba(31,7,40,0.85) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 40px 120px rgba(20,4,26,0.65);
+      z-index:1;
+    }
+    .issues-marquee::before,
+    .issues-marquee::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:120px;
+      pointer-events:none;
+      z-index:2;
+    }
+    .issues-marquee::before{
+      top:0;
+      background: linear-gradient(180deg, rgba(28,13,35,0.92) 0%, rgba(28,13,35,0));
+    }
+    .issues-marquee::after{
+      bottom:0;
+      background: linear-gradient(0deg, rgba(28,13,35,0.92) 0%, rgba(28,13,35,0));
+    }
+    .issues-track{
+      position:relative;
+      display:flex;
+      gap: clamp(32px, 4vw, 52px);
+      padding: clamp(32px, 3.2vw, 44px) clamp(24px, 3vw, 42px) clamp(40px, 4vw, 56px);
+      will-change: transform;
+    }
+    .issues-row{
+      flex: 0 0 clamp(720px, 86vw, 960px);
+      display:grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: clamp(18px, 2.8vw, 26px) clamp(16px, 2.4vw, 24px);
+      padding: clamp(22px, 2.4vw, 32px);
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 28px 60px rgba(13,4,18,0.42);
+      backdrop-filter: blur(6px);
+      position:relative;
+    }
+    .issues-row::after{
+      content:"";
+      position:absolute;
+      inset:10px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      pointer-events:none;
+      opacity:0.6;
+    }
+    .issue-card{
+      background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 90%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 26px 24px 24px;
+      box-shadow: 0 18px 40px rgba(12,3,18,0.45);
+      backdrop-filter: blur(5px);
+      min-height: 170px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      color:#f9eef7;
+      transform-style: preserve-3d;
+      position:relative;
+    }
+    .issue-card::after{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.12);
+      opacity:0.6;
+      pointer-events:none;
+    }
+    .issue-card h3{
+      margin:0;
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:0.02em;
+      line-height:1.4;
+      color:#ffeefc;
+    }
+    .issue-card p{
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:rgba(247,236,246,0.82);
+    }
+
+    @media (max-width: 1024px){
+      .issues-row{ flex: 0 0 clamp(600px, 90vw, 800px); grid-template-columns: repeat(3, minmax(160px, 1fr)); }
+      .issues-heading h2{ font-size: 36px; }
+    }
+    @media (max-width: 768px){
+      #issuesStack{ padding: 72px 5vw 120px; }
+      .issues-marquee{ height: auto; padding: 0 6px; }
+      .issues-track{ flex-direction: column; gap: 22px; padding: 18px 12px 30px; }
+      .issues-row{ flex: 1 1 auto; grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+      .issues-heading{ margin-bottom: 52px; top: -10px; transform: translateY(-6px); }
+    }
+    @media (max-width: 540px){
+      .issues-track{ padding: 12px 10px 26px; }
+      .issues-row{ grid-template-columns: repeat(1, minmax(240px, 1fr)); }
+      .issues-marquee{ height: auto; }
+      .issues-heading{ top: -10px; transform: translateY(-6px); }
+      .issues-heading h2{ font-size: 30px; }
+      .issue-card{ padding: 24px 22px; }
+    }
+
+    /* Contact section */
+    #contactSection{
+      position:relative;
+      padding: 120px 6vw 140px;
+      background: radial-gradient(circle at top right, rgba(224,149,189,0.18), rgba(224,149,189,0)) , linear-gradient(180deg, #fff8fb 0%, #f3e3f1 60%, #fdf8ff 100%);
+      overflow:hidden;
+    }
+    #contactSection::before{
+      content:"";
+      position:absolute;
+      inset: -280px -180px auto auto;
+      width: 680px;
+      height: 680px;
+      background: radial-gradient(circle at center, rgba(105,43,143,0.12), rgba(105,43,143,0));
+      pointer-events:none;
+      filter: blur(10px);
+      opacity:0.8;
+    }
+    #contactSection::after{
+      content:"";
+      position:absolute;
+      inset: auto auto -260px -220px;
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle at center, rgba(227,68,122,0.16), rgba(227,68,122,0));
+      pointer-events:none;
+      filter: blur(12px);
+      opacity:0.75;
+    }
+    .contact-wrapper{
+      position:relative;
+      max-width: 1120px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.1fr);
+      gap: clamp(32px, 4vw, 64px);
+      z-index:1;
+    }
+    .contact-intro{
+      display:flex;
+      flex-direction:column;
+      gap: 22px;
+      color:#5c2c58;
+    }
+    .contact-intro .kicker{
+      padding: 8px 18px;
+      border-radius:18px;
+      background: rgba(227,68,122,0.16);
+      display:inline-block;
+      color:#6b2c83;
+    }
+    .contact-intro h2{
+      margin:0;
+      font-size: clamp(30px, 3.2vw, 46px);
+      font-family:"Playfair Display",serif;
+      line-height:1.12;
+      color:#431b40;
+    }
+    .contact-intro p{
+      margin:0;
+      font-size: 16px;
+      line-height:1.7;
+      color:#6f3a68;
+    }
+    .contact-card{
+      background: rgba(255,255,255,0.9);
+      border-radius: 28px;
+      padding: clamp(32px, 3.2vw, 44px);
+      box-shadow: 0 32px 90px rgba(107,44,145,0.18);
+      border: 1px solid rgba(138,66,162,0.12);
+      backdrop-filter: blur(10px);
+    }
+    .form-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 24px;
+    }
+    .form-grid .full{
+      grid-column: 1 / -1;
+    }
+    .form-field{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .form-field label{
+      font-size: 13px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:#7a3a70;
+      font-weight:600;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea{
+      width:100%;
+      padding: 14px 16px;
+      border-radius:16px;
+      border: 1px solid rgba(122,58,132,0.22);
+      background: rgba(255,255,255,0.85);
+      color:#4a1f46;
+      font-size:15px;
+      line-height:1.5;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-field textarea{ min-height: 140px; resize: vertical; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus{
+      outline:none;
+      border-color: rgba(227,68,122,0.6);
+      box-shadow: 0 0 0 3px rgba(227,68,122,0.18);
+    }
+    .form-consent{
+      margin-top: 20px;
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      font-size:13px;
+      color:#6a3464;
+    }
+    .form-consent input{ margin-top:4px; }
+    .submit-row{
+      margin-top: 30px;
+      display:flex;
+      gap: 16px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .submit-row button{
+      border:none;
+      border-radius: 18px;
+      padding: 14px 26px;
+      font-size: 15px;
+      color:#fff;
+      background: linear-gradient(135deg, #6b2c91, #e3447a);
+      box-shadow: 0 18px 36px rgba(107,44,145,0.26);
+      cursor:pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .submit-row button:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 24px 50px rgba(107,44,145,0.32);
+    }
+    .submit-row .note{
+      font-size: 13px;
+      color:#6c3468;
+    }
+
+    /* Footer */
+    #siteFooter{
+      background: linear-gradient(180deg, #1b0b24 0%, #0f0515 100%);
+      color: rgba(255,238,252,0.84);
+      padding: 80px 6vw 42px;
+    }
+    .footer-grid{
+      max-width: 1120px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: minmax(220px, 1.1fr) repeat(3, minmax(150px, 1fr));
+      gap: clamp(28px, 3vw, 48px);
+    }
+    .footer-brand img{
+      width: 142px;
+      filter: drop-shadow(0 12px 24px rgba(242,149,193,0.32));
+    }
+    .footer-brand p{
+      margin:18px 0 0;
+      font-size:14px;
+      line-height:1.6;
+      color: rgba(255,238,252,0.75);
+    }
+    .footer-column h4{
+      margin:0 0 16px;
+      font-size:15px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color: rgba(255,238,252,0.82);
+    }
+    .footer-links{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      font-size:14px;
+      color: rgba(255,238,252,0.7);
+    }
+    .footer-links a{
+      color: inherit;
+      text-decoration:none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover{ color:#ffeefc; }
+    .footer-bottom{
+      max-width: 1120px;
+      margin: 48px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,238,252,0.12);
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap: 16px;
+      font-size:12px;
+      letter-spacing:0.08em;
+      color: rgba(255,238,252,0.6);
+    }
+
+    @media (max-width: 960px){
+      .contact-wrapper{ grid-template-columns: 1fr; }
+      .contact-intro{ text-align:center; align-items:center; }
+    }
+    @media (max-width: 680px){
+      #contactSection{ padding: 100px 20px 120px; }
+      .form-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px){
+      .footer-grid{ grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+    }
+    @media (max-width: 460px){
+      .footer-grid{ grid-template-columns: 1fr; }
+      #siteFooter{ padding: 70px 20px 36px; }
+    }
+
+    .gutter-well{
+      position:absolute;
+      inset: 18px 10px;
+      border-radius: 22px;
+      transform: translateZ(10px);
+      background:
+        radial-gradient(60% 120% at 50% 50%, rgba(0,0,0,0.10), rgba(0,0,0,0.00) 60%),
+        linear-gradient(90deg,
+          rgba(0,0,0,0.16) 0%,
+          rgba(0,0,0,0.08) 18%,
+          rgba(0,0,0,0.00) 40%,
+          rgba(0,0,0,0.00) 60%,
+          rgba(0,0,0,0.08) 82%,
+          rgba(0,0,0,0.16) 100%);
+      opacity: 0;
+      pointer-events:none;
+      z-index: 2;
+    }
+
+    .spine{
+      position:absolute;
+      top:0;
+      left:50%;
+      width: 26px;
+      height: 100%;
+      transform: translateX(-13px) translateZ(34px);
+      border-radius: 18px;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,0.45) 0%,
+          rgba(0,0,0,0.16) 48%,
+          rgba(255,255,255,0.18) 90%),
+        linear-gradient(180deg, rgba(106,44,145,0.95), rgba(227,68,122,0.84));
+      box-shadow:
+        inset -4px 0 12px rgba(43,9,67,0.25),
+        inset 4px 0 12px rgba(227,68,122,0.18),
+        0 18px 70px rgba(0,0,0,0.22);
+      pointer-events:none;
+      z-index:60;
+    }
+
+    .page-edges{
+      position:absolute;
+      top: 12px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 24px);
+      border-radius: 22px;
+      transform: translateZ(18px);
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(120,80,140,0.085) 0px,
+          rgba(120,80,140,0.085) 1px,
+          rgba(255,255,255,0.02) 1px,
+          rgba(255,255,255,0.02) 3px
+        ),
+        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.70));
+      border: 1px solid rgba(106,44,145,0.10);
+      box-shadow: inset 0 0 22px rgba(0,0,0,0.09), -2px 8px 26px rgba(0,0,0,0.12);
+      opacity: 0;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .cover{
+      position:absolute;
+      inset:0;
+      width:50%;
+      height:100%;
+      left:0;
+      border-radius: 24px;
+      transform-origin: 0% 50%;
+      transform-style: preserve-3d;
+      backface-visibility:hidden;
+      background:
+        radial-gradient(260px at 30% 18%, rgba(255,255,255,0.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(106,44,145,0.97), rgba(227,68,122,0.90));
+      border: 1px solid rgba(255,255,255,0.35);
+      box-shadow: 0 44px 130px rgba(0,0,0,0.24), inset 2px 0 10px rgba(0,0,0,0.14);
+      z-index:80;
+      overflow:hidden;
+    }
+    .cover::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg,
+        rgba(0,0,0,0.26),
+        rgba(0,0,0,0.08) 30%,
+        rgba(255,255,255,0.00) 72%
+      );
+      opacity:0.55;
+      pointer-events:none;
+    }
+    .cover .shine{
+      position:absolute; inset:-2px;
+      border-radius: 26px;
+      background: radial-gradient(circle at 20% 12%, rgba(255,255,255,0.55), rgba(255,255,255,0.10) 40%, rgba(255,255,255,0) 74%);
+      opacity:0.6;
+      mix-blend-mode: screen;
+      pointer-events:none;
+      transform: translateZ(2px);
+    }
+    .cover-title{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding: 26px;
+      color:#fff;
+      transform: translateZ(1px);
+    }
+    /* removed "Scroll to open" text per your request */
+    .cover-title .main{
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 2.6vw, 40px);
+      text-shadow: 0 22px 50px rgba(0,0,0,0.28);
+      line-height: 1.2;
+      max-width: 92%;
+    }
+
+    .sheet{
+      position:absolute;
+      inset:0;
+      transform-style:preserve-3d;
+      opacity:0;
+      z-index: 30;
+      pointer-events:none;
+    }
+
+    .page{
+      position:absolute;
+      top: 18px;
+      height: calc(100% - 36px);
+      width: calc(50% - 14px);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(106,44,145,0.10);
+      box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.8),
+        0 18px 42px rgba(0,0,0,0.08),
+        -1px 4px 12px rgba(0,0,0,0.06);
+      overflow:hidden;
+      backface-visibility:hidden;
+      transform-style:preserve-3d;
+    }
+
+    .left-page{
+      left: 7px;
+      transform-origin: 100% 50%;
+      transform: translateZ(34px);
+      z-index:10;
+    }
+    .right-page{
+      right: 7px;
+      transform-origin: 0% 50%;
+      transform: translateZ(38px);
+      z-index:20;
+    }
+
+    .left-page::after,
+    .right-page::after{
+      content:"";
+      position:absolute;
+      top:0;
+      width:16px;
+      height:100%;
+      pointer-events:none;
+      opacity:0.80;
+      z-index:50;
+    }
+    .left-page::after{
+      right:-8px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.14), rgba(0,0,0,0));
+    }
+    .right-page::after{
+      left:-8px;
+      background: linear-gradient(270deg, rgba(0,0,0,0.16), rgba(0,0,0,0));
+    }
+
+    .curl{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:0;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,0.00) 0%,
+          rgba(255,255,255,0.25) 22%,
+          rgba(255,255,255,0.70) 50%,
+          rgba(255,255,255,0.18) 78%,
+          rgba(255,255,255,0.00) 100%);
+      mix-blend-mode: screen;
+      transform: translateZ(1px);
+    }
+
+    .page-inner{ padding: 34px; color: #5b2450; }
+    .page-inner.narrative{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+    }
+    .kicker{
+      text-transform:uppercase;
+      letter-spacing:0.18em;
+      font-weight:700;
+      font-size:12px;
+      color:#823067;
+    }
+    .page-inner h2{
+      margin:0 0 10px;
+      font-family:"Playfair Display",serif;
+      color: var(--purple);
+      font-size: clamp(22px, 2.2vw, 34px);
+    }
+    .page-inner p{
+      margin:0 0 12px;
+      line-height:1.65;
+      color:#6e3256;
+      font-size: 16px;
+    }
+    .page-inner ul{
+      margin:0;
+      padding-left:18px;
+      line-height:1.9;
+      color:#7a2553;
+      font-weight:600;
+    }
+
+    .woman-art{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding: 16px;
+    }
+    .woman-art img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius: 14px;
+      box-shadow: 0 18px 46px rgba(0,0,0,0.10);
+    }
+
+    @media (max-width: 560px){
+      .book-scene{ height: min(520px, 70vh); }
+      .page-inner{ padding: 22px; }
+      .page-inner p{ font-size: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-3d" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-blob b1"></div>
+    <div class="bg-blob b2"></div>
+    <div class="bg-blob b3"></div>
+    <div class="bg-orb o1"></div>
+    <div class="bg-orb o2"></div>
+    <div class="bg-orb o3"></div>
+    <div class="bg-orb o4"></div>
+  </div>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <img src="images/dove.png" class="bird" id="dove" alt="Khushi Dove" />
+    <div class="dots" id="dots">
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot" id="expandDot"></div>
+      <div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+
+  <div id="palette" aria-hidden="true"></div>
+
+  <!-- HERO / BANNER -->
+  <section id="hero">
+    <div class="hero-stage" id="heroStage">
+      <div class="hero-card" id="heroCard">
+        <div class="hero-shine" id="heroShine"></div>
+
+        <div class="hero-logo" id="heroLogo">
+          <img src="images/logo.png" alt="Khushi MT Kit Logo">
+        </div>
+
+        <h1 class="hero-title">
+          <span>Your Choice</span>
+          <span>Your Privacy</span>
+          <span>Your Support</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Clear answers. Private support. A calmer next step — whenever you’re ready.
+        </p>
+
+        <div class="hero-cta">
+          <button class="primary">Watch Video</button>
+          <button class="secondary">Call Helpline</button>
+        </div>
+
+        <div class="support-strip">
+          <div class="support-item"><span class="support-icon">🩺</span>Non-judgmental experts</div>
+          <div class="support-item"><span class="support-icon">🛡️</span>Confidential helpline</div>
+          <div class="support-item"><span class="support-icon">📖</span>Evidence-based answers</div>
+        </div>
+
+        <div class="scroll-hint">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5v14m0 0-5-5m5 5 5-5" />
+          </svg>
+          Scroll for more comfort
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK SECTION -->
+  <section id="bookSection">
+    <div class="pinWrap">
+      <div class="book-scene">
+        <div class="book" id="book">
+
+          <div class="page-edges" id="edges" aria-hidden="true"></div>
+          <div class="gutter-well" id="gutterWell" aria-hidden="true"></div>
+          <div class="spine" aria-hidden="true"></div>
+          <div class="book-hint" id="bookHint">
+            <div>
+              <div class="kicker">Scroll softly</div>
+              <h2>Scroll to Open</h2>
+              <p>Let the cover lift and the story begin.</p>
+            </div>
+          </div>
+
+          <!-- Spread 1 -->
+          <div class="sheet" id="s1">
+            <div class="page left-page">
+              <div class="page-inner narrative">
+                  <div class="kicker" style="text-transform:uppercase;letter-spacing:0.18em;font-weight:600;font-size:13px;color:#823067;">Scroll hint</div>
+                  <h2 style="margin:10px 0 12px;">Scroll to Open</h2>
+                  <p style="margin:0;color:#7a2553;">Ease into the story one flip at a time.</p>
+                <h2>Claim Your Calm</h2>
+                <p>Center yourself before you turn the first page. This is your space to gather strength and soften any worries.</p>
+                <p style="margin-bottom:0;">Every flip is a quiet reminder: you carry authority over your body, your timing, and your choices.</p>
+              </div>
+            </div>
+            <div class="page right-page">
+              <div class="curl"></div>
+              <div class="page-inner woman-art">
+                <img src="images/bookflip1.jpg" alt="Supportive friends calming one another" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Spread 2 -->
+          <div class="sheet" id="s2">
+            <div class="page left-page">
+              <div class="page-inner narrative">
+                <div class="kicker">Scroll down</div>
+                <h2>Your Support Matters</h2>
+                <p>Explore your options with someone who holds space for every feeling. You deserve answers that respect your pace.</p>
+                <ul>
+                  <li>Speak with caring listeners</li>
+                  <li>Get facts free of pressure</li>
+                  <li>Choose when you are ready</li>
+                </ul>
+                <p style="margin-bottom:0;font-weight:700;color:#6a2c91;">Keep scrolling for more support.</p>
+              </div>
+            </div>
+            <div class="page right-page">
+              <div class="curl"></div>
+              <div class="page-inner woman-art">
+                <img src="images/pads.jpg" alt="Comfort items including heating pad" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Cover (no "scroll to open" text) -->
+          <div class="cover" id="cover">
+            <div class="shine"></div>
+            <div class="cover-title">
+              <div class="main">What does the voice of power and authority sound like in your head?</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <section id="videoSection">
+      <div class="video-shell">
+        <div class="video-content">
+          <div class="video-heading" id="videoHeading">
+            <h2>See Support in Motion</h2><br/>
+            <!-- <p>A short glimpse into how the Khushi helpline walks beside you with privacy, warmth, and clarity.</p> -->
+          </div>
+          <div class="video-frame" id="supportVideo" style="padding-top: 10px;">
+            <iframe id="supportVideoFrame" src="https://www.youtube.com/embed/5qap5aO4i9A?rel=0&amp;modestbranding=1&amp;playsinline=1&amp;mute=1&amp;enablejsapi=1" title="Khushi Support Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="supportHighlights">
+    <div class="cards-shell">
+      <article class="support-card">
+        <div class="card-icon" aria-hidden="true">🤝</div>
+        <h3>Companionship That Listens</h3>
+        <p>Connect with trained listeners who hold space for your story without rushing your next move.</p>
+      </article>
+      <article class="support-card">
+        <div class="card-icon" aria-hidden="true">🔒</div>
+        <h3>Guarded Privacy</h3>
+        <p>Every call and chat stays between us, giving you a calm corner to ask sensitive questions freely.</p>
+      </article>
+      <article class="support-card">
+        <div class="card-icon" aria-hidden="true">🧭</div>
+        <h3>Clear Guidance</h3>
+        <p>Receive practical next steps, legal clarity, and timeline options that match your comfort level.</p>
+      </article>
+      <article class="support-card">
+        <div class="card-icon" aria-hidden="true">🌙</div>
+        <h3>Support After Hours</h3>
+        <p>We stay reachable during the moments you need grounding most, even when the rest of the world is quiet.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="issuesStack">
+    <div class="issues-heading">
+      <span class="kicker">Women's Issues</span>
+      <h2>Twenty Stories We Stand Beside</h2>
+      <p>Each card reflects a lived challenge that women navigate daily. Scroll through to surface pathways, rights, and relief designed to meet every moment with dignity.</p>
+    </div>
+
+    <div class="issues-marquee" id="issuesMarquee">
+      <div class="issues-track" id="issuesTrack"></div>
+    </div>
+  </section>
+
+  <section id="contactSection">
+    <div class="contact-wrapper">
+      <div class="contact-intro">
+        <span class="kicker">Reach Out</span>
+        <h2>Share Your Story, Choose Your Next Step</h2>
+        <p>Leave your details and let us know how we can walk beside you. A counselor from our support team will respond with privacy-first guidance, honest answers, and a calming plan.</p>
+        <p style="font-weight:600;color:#5a2c53;">Prefer to call? Dial <a href="tel:+919876543210" style="color:#6b2c91;text-decoration:none;">+91 98765 43210</a> for 24/7 comfort.</p>
+      </div>
+      <div class="contact-card">
+        <form id="supportContactForm" novalidate>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="contactName">Full Name</label>
+              <input type="text" id="contactName" name="contactName" placeholder="Your name" required>
+            </div>
+            <div class="form-field">
+              <label for="contactEmail">Email</label>
+              <input type="email" id="contactEmail" name="contactEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="form-field">
+              <label for="contactPhone">Phone</label>
+              <input type="tel" id="contactPhone" name="contactPhone" placeholder="Include country code" required>
+            </div>
+            <div class="form-field">
+              <label for="contactCity">City / Region</label>
+              <input type="text" id="contactCity" name="contactCity" placeholder="Where should we call back?">
+            </div>
+            <div class="form-field">
+              <label for="contactTopic">Support Topic</label>
+              <select id="contactTopic" name="contactTopic" required>
+                <option value="" disabled selected>Select the closest match</option>
+                <option>Medication Guidance</option>
+                <option>Legal Rights</option>
+                <option>Emotional Support</option>
+                <option>Aftercare Planning</option>
+                <option>Something Else</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="contactMessage">How Can We Help?</label>
+              <textarea id="contactMessage" name="contactMessage" placeholder="Share as much or as little detail as feels right." required></textarea>
+            </div>
+          </div>
+          <label class="form-consent">
+            <input type="checkbox" id="contactConsent" required>
+            <span>I agree to be contacted by the Khushi support team and understand my details remain confidential.</span>
+          </label>
+          <div class="submit-row">
+            <button type="submit">Send Request</button>
+            <span class="note">Average response time: under 30 minutes.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer id="siteFooter">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Khushi Support Logo">
+        <p>Khushi MT Kit surrounds you with discreet, compassionate care for every question and every choice. We meet you where you are and move at your pace.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Support</h4>
+        <div class="footer-links">
+          <a href="#hero">Start Here</a>
+          <a href="#bookSection">Khushi Story</a>
+          <a href="#supportHighlights">Services</a>
+          <a href="#contactSection">Talk to Us</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <div class="footer-links">
+          <a href="#issuesStack">Women's Issues</a>
+          <a href="https://example.com/guides" target="_blank" rel="noopener">Guides &amp; Articles</a>
+          <a href="https://example.com/legal" target="_blank" rel="noopener">Legal Rights</a>
+          <a href="https://example.com/privacy" target="_blank" rel="noopener">Privacy Promise</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <div class="footer-links">
+          <a href="mailto:care@khushi.support">care@khushi.support</a>
+          <a href="tel:+919876543210">+91 98765 43210</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://whatsapp.com" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Khushi Collective. All rights reserved.</span>
+      <span>Made with trust, softness, and solidarity.</span>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const mm = gsap.matchMedia();
+
+      /* ================= PRELOADER + HERO (YOUR ORIGINAL FLOW) ================= */
+      const preloader = document.getElementById("preloader");
+      const dove = document.getElementById("dove");
+      const dots = document.getElementById("dots");
+      const expandDot = document.getElementById("expandDot");
+      const palette = document.getElementById("palette");
+      const hero = document.getElementById("hero");
+
+      const heroStage = document.getElementById("heroStage");
+      const heroCard  = document.getElementById("heroCard");
+      const heroLogo  = document.getElementById("heroLogo");
+      const heroShine = document.getElementById("heroShine");
+
+      // Background motion (subtle)
+      gsap.to(".bg-blob.b1", { x: 40, y: 30, duration: 6, yoyo: true, repeat: -1, ease: "sine.inOut" });
+      gsap.to(".bg-blob.b2", { x: -55, y: 28, duration: 7, yoyo: true, repeat: -1, ease: "sine.inOut" });
+      gsap.to(".bg-blob.b3", { x: 35, y: -30, duration: 8, yoyo: true, repeat: -1, ease: "sine.inOut" });
+
+      // Dove start
+      gsap.set(dove, { x: window.innerWidth + 220, y: -220, opacity: 0 });
+
+      // Pre-hide hero elements
+      gsap.set(heroStage, { clearProps: "transform", opacity: 1 });
+      gsap.set(heroCard, { opacity: 0, scale: 0.55, y: 18, rotateX: 14, rotateY: -10, z: -260, transformOrigin: "50% 50%" });
+      gsap.set(heroLogo, { y: -12, opacity: 0, scale: 0.92 });
+      gsap.set([".hero-title span", ".hero-subtitle", ".hero-cta", ".support-item", ".scroll-hint"], { opacity: 0, y: 16 });
+
+      // Compute target for dove
+      const dotsRect = dots.getBoundingClientRect();
+      const doveRect = dove.getBoundingClientRect();
+      const targetX = dotsRect.left + dotsRect.width / 2 - doveRect.width / 2;
+      const targetY = dotsRect.top - doveRect.height - 10;
+
+      // Compute expandDot center for palette origin
+      const d = expandDot.getBoundingClientRect();
+      const originX = d.left + d.width / 2;
+      const originY = d.top + d.height / 2;
+      gsap.set(palette, { x: originX - 20, y: originY - 20, opacity: 0, scale: 0 });
+
+      const introTL = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      introTL.from(".dot", { opacity: 0, scale: 0.6, stagger: 0.08, duration: 0.42 });
+      introTL.to(dove, { x: targetX, y: targetY, opacity: 1, duration: 1.35 });
+      introTL.to(dove, { y: targetY - 8, repeat: 2, yoyo: true, duration: 0.6 });
+
+      introTL.to(expandDot, { scale: 42, duration: 0.7 }, "-=0.1");
+      introTL.to(palette, { opacity: 1, scale: 70, duration: 0.9, ease: "expo.out" }, "<");
+
+      introTL.add(() => {
+        if (preloader && preloader.parentNode) preloader.remove();
+        hero.style.display = "flex";
+        ScrollTrigger.refresh();
+      });
+
+      introTL.to(palette, {
+        opacity: 0,
+        duration: 1.0,
+        ease: "power2.out",
+        onComplete: () => palette.remove()
+      }, "+=0.1");
+
+      // Hero sequence
+      introTL.to(heroCard, { opacity: 1, scale: 1, y: 0, rotateX: 0, rotateY: 0, z: 0, duration: 1.05, ease: "back.out(1.2)" });
+      introTL.to(heroCard, { rotateZ: 0.4, duration: 0.12, ease: "power1.out" }, "-=0.25");
+      introTL.to(heroCard, { rotateZ: 0, duration: 0.22, ease: "power1.out" });
+
+      introTL.to(heroLogo, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.6)" }, "-=0.10");
+      introTL.to(".hero-title span", { opacity: 1, y: 0, stagger: 0.12, duration: 0.55, ease: "power3.out" }, "-=0.05");
+      introTL.to(".hero-subtitle", { opacity: 1, y: 0, duration: 0.45 }, "-=0.25");
+      introTL.to(".hero-cta", { opacity: 1, y: 0, duration: 0.45 }, "-=0.25");
+      introTL.to(".support-item", { opacity: 1, y: 0, stagger: 0.10, duration: 0.42 }, "-=0.25");
+      introTL.to(".scroll-hint", { opacity: 1, y: 0, duration: 0.40 }, "-=0.25");
+
+      // Hero tilt
+      const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+      function setTilt(clientX, clientY) {
+        const r = heroCard.getBoundingClientRect();
+        const px = (clientX - r.left) / r.width;
+        const py = (clientY - r.top) / r.height;
+        const tiltX = clamp((0.5 - py) * 18, -14, 14);
+        const tiltY = clamp((px - 0.5) * 22, -16, 16);
+
+        gsap.to(heroCard, { rotateX: tiltX, rotateY: tiltY, duration: 0.35, ease: "power3.out" });
+        gsap.to(heroShine, {
+          background: `radial-gradient(circle at ${Math.round(px*100)}% ${Math.round(py*100)}%, rgba(255,255,255,0.72), rgba(255,255,255,0.10) 42%, rgba(255,255,255,0) 70%)`,
+          duration: 0.35,
+          ease: "power2.out"
+        });
+      }
+      function resetTilt() {
+        gsap.to(heroCard, { rotateX: 0, rotateY: 0, duration: 0.5, ease: "power3.out" });
+        gsap.to(heroShine, {
+          background: "radial-gradient(circle at 20% 10%, rgba(255,255,255,0.65), rgba(255,255,255,0.06) 40%, rgba(255,255,255,0) 70%)",
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      }
+      window.addEventListener("mousemove", (e) => {
+        const r = heroCard.getBoundingClientRect();
+        const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (inside) setTilt(e.clientX, e.clientY);
+        else resetTilt();
+      });
+      window.addEventListener("touchmove", (e) => {
+        if (!e.touches || !e.touches.length) return;
+        const t = e.touches[0];
+        setTilt(t.clientX, t.clientY);
+      }, { passive: true });
+      window.addEventListener("touchend", resetTilt);
+
+      /* ================= BOOK (HIGH-END, NO COVER HINT TEXT) ================= */
+      const bookSection = document.getElementById("bookSection");
+      const book = document.getElementById("book");
+      const cover = document.getElementById("cover");
+      const edges = document.getElementById("edges");
+      const gutterWell = document.getElementById("gutterWell");
+      const bookHint = document.getElementById("bookHint");
+
+      const sheets = Array.from(document.querySelectorAll(".sheet"));
+      const entries = sheets.map((sheet, i) => ({
+        sheet,
+        left: sheet.querySelector(".left-page"),
+        right: sheet.querySelector(".right-page"),
+        curl: sheet.querySelector(".right-page .curl"),
+        i
+      }));
+
+      // Initial state to avoid any flashes
+      gsap.set(book, {
+        rotateX: 16,
+        rotateY: -22,
+        y: 90,
+        x: -26,
+        scale: 0.98,
+        transformOrigin: "50% 50%",
+        transformStyle: "preserve-3d",
+        force3D: true
+      });
+
+      gsap.set([edges, gutterWell], { opacity: 0 });
+
+      gsap.set(cover, {
+        rotationY: 0,
+        transformOrigin: "0% 50%",
+        zIndex: 200,
+        force3D: true
+      });
+
+      gsap.set(sheets, { opacity: 0, zIndex: (i) => 120 - i, force3D: true });
+      entries.forEach(e => {
+        if (e.left) gsap.set(e.left, { opacity: 0, rotationY: 0, force3D: true });
+        if (e.right) gsap.set(e.right, { opacity: 0, rotationY: 0, force3D: true });
+        if (e.curl) gsap.set(e.curl, { opacity: 0 });
+      });
+
+      // Pinned scroll book timeline
+      const bookTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: bookSection,
+          start: "top top",
+          end: "+=3200",
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        },
+        defaults: { ease: "none" }
+      });
+
+      // Stand straight + slight right shift (nice hinge feel)
+      bookTL.to(book, {
+        rotateX: 0,
+        rotateY: 0,
+        rotateZ: 0,
+        y: 0,
+        x: 24,
+        scale: 1,
+        duration: 0.45,
+        ease: "power2.inOut"
+      }, 0);
+
+      bookTL.to(edges, { opacity: 1, duration: 0.22, ease: "sine.out" }, 0.18);
+      bookTL.to(gutterWell, { opacity: 1, duration: 0.22, ease: "sine.out" }, 0.22);
+
+      // Open cover
+      bookTL.to(cover, {
+        rotationY: -180,
+        duration: 0.55,
+        ease: "power2.inOut"
+      }, 0.36);
+
+      if (bookHint) {
+        bookTL.to(bookHint, {
+          opacity: 0,
+          duration: 0.26,
+          ease: "sine.inOut"
+        }, 0.50);
+      }
+
+      // Reveal first spread (your "hidden page which comes into picture")
+      const first = entries[0];
+      if (first) {
+        bookTL.set(first.sheet, { opacity: 1 }, 0.56);
+        if (first.left) bookTL.to(first.left, { opacity: 1, duration: 0.26, ease: "sine.out" }, 0.58);
+        if (first.right) bookTL.to(first.right, { opacity: 1, duration: 0.26, ease: "sine.out" }, 0.58);
+      }
+
+      // Flips
+      const flipGap = 0.68;
+      entries.forEach((e, idx) => {
+        const start = 0.95 + idx * flipGap;
+        const next = entries[idx + 1];
+        if (!e.right) return;
+
+        if (!next) {
+          bookTL.set(e.sheet, { opacity: 1 }, start - 0.2);
+          if (e.left) bookTL.set(e.left, { opacity: 1 }, start - 0.2);
+          if (e.right) bookTL.set(e.right, { opacity: 1 }, start - 0.2);
+          return;
+        }
+
+        if (e.left) bookTL.set(e.left, { opacity: 1 }, start - 0.06);
+
+        if (e.curl) bookTL.to(e.curl, { opacity: 0.55, duration: 0.18, ease: "sine.out" }, start + 0.04);
+
+        bookTL.to(e.right, {
+          rotationY: -180,
+          duration: 0.58,
+          ease: "power2.inOut"
+        }, start);
+
+        if (e.curl) bookTL.to(e.curl, { opacity: 0, duration: 0.18, ease: "sine.in" }, start + 0.52);
+
+        if (e.left) bookTL.to(e.left, { opacity: 0, duration: 0.16, ease: "sine.in" }, start + 0.34);
+
+        bookTL.to(e.right, { opacity: 0, duration: 0.08, ease: "sine.in" }, start + 0.64);
+        bookTL.set(e.sheet, { zIndex: 30 - idx }, start + 0.70);
+
+        bookTL.set(next.sheet, { opacity: 1 }, start + 0.16);
+
+        if (next.right) {
+          bookTL.fromTo(next.right,
+            { opacity: 0, rotationY: 0 },
+            { opacity: 1, duration: 0.22, ease: "sine.out" },
+            start + 0.16
+          );
+        }
+
+        if (next.left) {
+          bookTL.set(next.left, { opacity: 0, rotationY: 0 }, start + 0.16);
+          bookTL.to(next.left, {
+            opacity: 1,
+            duration: 0.22,
+            ease: "sine.out"
+          }, start + 0.42);
+        }
+      });
+
+      const videoSectionEl = document.getElementById("videoSection");
+      const supportVideo = document.getElementById("supportVideo");
+      const videoHeading = document.getElementById("videoHeading");
+      const supportVideoFrame = document.getElementById("supportVideoFrame");
+
+      const videoLabel = "videoReveal";
+      if (videoSectionEl) {
+        bookTL.addLabel(videoLabel, bookTL.duration() + 0.4);
+      }
+
+      if (videoSectionEl && supportVideo) {
+        mm.add("(min-width: 769px)", () => {
+          const ctx = gsap.context(() => {
+            gsap.set(videoSectionEl, { autoAlpha: 0, yPercent: 60, pointerEvents: "none" });
+            if (videoHeading) gsap.set(videoHeading, { opacity: 0, y: 32 });
+            gsap.set(supportVideo, { opacity: 0, scale: 0.86, yPercent: 12 });
+
+            bookTL.set(videoSectionEl, { pointerEvents: "none" }, videoLabel);
+            bookTL.to(videoSectionEl, { autoAlpha: 1, yPercent: -4, duration: 0.9, ease: "power3.out" }, videoLabel);
+            if (videoHeading) {
+              bookTL.to(videoHeading, { opacity: 1, y: -6, duration: 0.72, ease: "power3.out" }, `${videoLabel}`);
+            }
+            bookTL.to(supportVideo, { opacity: 1, scale: 0.97, yPercent: 6, duration: 0.9, ease: "power2.out" }, `${videoLabel}+=0.08`);
+            bookTL.set(videoSectionEl, { pointerEvents: "auto" }, `${videoLabel}+=0.12`);
+            bookTL.to(videoSectionEl, { yPercent: -60, duration: 1.15, ease: "sine.inOut" }, `${videoLabel}+=1.0`);
+            bookTL.to(supportVideo, { scale: 1.05, yPercent: -6, duration: 1.15, ease: "sine.inOut" }, `${videoLabel}+=1.0`);
+            bookTL.to(videoSectionEl, { yPercent: -52, duration: 0.9, ease: "power2.out" }, `${videoLabel}+=2.2`);
+            bookTL.to(supportVideo, { scale: 1.01, yPercent: -2, duration: 0.9, ease: "power2.out" }, `${videoLabel}+=2.2`);
+          });
+
+          return () => ctx.revert();
+        });
+
+        mm.add("(max-width: 768px)", () => {
+          let mobileTimeline;
+          const ctx = gsap.context(() => {
+            gsap.set(videoSectionEl, { opacity: 1, pointerEvents: "auto", yPercent: 0 });
+            if (videoHeading) gsap.set(videoHeading, { opacity: 0, y: 48 });
+            gsap.set(supportVideo, { opacity: 0, scale: 0.96, yPercent: 18 });
+
+            mobileTimeline = gsap.timeline({
+              scrollTrigger: {
+                trigger: videoSectionEl,
+                start: "top 85%",
+                end: "bottom 35%",
+                scrub: true,
+                invalidateOnRefresh: true
+              }
+            });
+
+            if (videoHeading) {
+              mobileTimeline.to(videoHeading, { opacity: 1, y: 0, ease: "power2.out" }, 0);
+            }
+            mobileTimeline.to(supportVideo, { opacity: 1, scale: 1.02, yPercent: -4, ease: "power2.out" }, 0);
+          });
+
+          return () => {
+            if (mobileTimeline) {
+              mobileTimeline.scrollTrigger && mobileTimeline.scrollTrigger.kill();
+              mobileTimeline.kill();
+              mobileTimeline = null;
+            }
+            ctx.revert();
+          };
+        });
+      }
+
+      const cardsSection = document.getElementById("supportHighlights");
+      const highlightCards = cardsSection ? gsap.utils.toArray(".support-card") : [];
+
+      if (cardsSection && highlightCards.length) {
+        highlightCards.forEach((card) => {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: "top 82%",
+              toggleActions: "play none none none"
+            }
+          }).fromTo(card, {
+            opacity: 0,
+            filter: "blur(18px)",
+            xPercent: 120,
+            z: 220,
+            rotationY: -92,
+            rotationX: -6,
+            skewY: -6,
+            scale: 0.88,
+            force3D: true,
+            transformOrigin: "100% 50%"
+          }, {
+            opacity: 1,
+            filter: "blur(0px)",
+            xPercent: 0,
+            z: 0,
+            rotationY: 0,
+            rotationX: 0,
+            skewY: 0,
+            scale: 1,
+            duration: 1.05,
+            ease: "expo.out",
+            force3D: true
+          });
+        });
+      }
+
+      const issuesStackEl = document.getElementById("issuesStack");
+      const issuesMarquee = document.getElementById("issuesMarquee");
+      const issuesTrack = document.getElementById("issuesTrack");
+
+      if (issuesStackEl && issuesMarquee && issuesTrack) {
+        const issueThemes = [
+          { topic: "Menstrual Health Equity", description: "Reliable information and supplies for every cycle, free from stigma." },
+          { topic: "Safe Abortion Guidance", description: "Judgment-free explainers on pills, procedures, and aftercare." },
+          { topic: "Maternal Care Rights", description: "Know your entitlements for antenatal visits, leave, and respectful delivery." },
+          { topic: "Gender-Based Violence Response", description: "Plan safe exits, evidence collection, and trauma-first healing." },
+          { topic: "Contraceptive Access", description: "Compare methods, side effects, and cost-saving programs." },
+          { topic: "Adolescent Sexual Education", description: "Age-appropriate lessons that protect curiosity and consent." },
+          { topic: "Workplace Dignity", description: "Policies and scripts for taking on harassment or bias at work." },
+          { topic: "Economic Empowerment", description: "Micro-loan networks, skill labs, and mentors for resilience." },
+          { topic: "Mental Health Support", description: "Low-cost therapists, helplines, and grounding routines." },
+          { topic: "Digital Safety", description: "Secure your accounts, evidence abuse, and reclaim your feeds." },
+          { topic: "Legal Aid Navigation", description: "Trusted lawyers and paperwork guides for urgent petitions." },
+          { topic: "LGBTQ+ Affirming Care", description: "Clinics and counselors who respect every identity." },
+          { topic: "Rural Health Outreach", description: "Mobile clinics, telehealth, and pharmacy tie-ups off the grid." },
+          { topic: "Disability Inclusive Care", description: "Accessible clinics, interpreters, and adaptive wellness plans." },
+          { topic: "Safe Housing", description: "Emergency shelters, rental rights, and safety planning tools." },
+          { topic: "Nutrition and Wellness", description: "Balanced meal plans and subsidy programs for every trimester." },
+          { topic: "Emergency Transport", description: "Ambulance partners and safe ride shares at critical hours." },
+          { topic: "Community Care Circles", description: "Moderated peer groups and community radios for solidarity." },
+          { topic: "Trafficking Prevention", description: "Hotlines, exit routes, and survivor-led support systems." },
+          { topic: "Healing After Loss", description: "Compassionate grief spaces and rituals that honor every story." }
+        ];
+
+        const accentVariants = [
+          { label: "Care Pathways", blurb: "Find clear next steps and trusted clinics aligned with your comfort." },
+          { label: "Rights and Policy", blurb: "Understand laws, documentation, and free legal helplines in your state." },
+          { label: "Community Voices", blurb: "Connect with moderated peer groups and survivor-led circles for encouragement." },
+          { label: "Emergency Relief", blurb: "Access rapid helplines, crisis funds, and transport partners when time matters." }
+        ];
+
+        const totalCards = 20;
+        const cardsPerRow = 4;
+        const rowsNeeded = Math.ceil(totalCards / cardsPerRow);
+
+        const cardsData = Array.from({ length: totalCards }, (_, i) => {
+          const issue = issueThemes[i % issueThemes.length];
+          const variant = accentVariants[i % accentVariants.length];
+          return { issue, variant };
+        });
+
+        const fragment = document.createDocumentFragment();
+
+        for (let row = 0; row < rowsNeeded; row++) {
+          const rowStartIndex = row * cardsPerRow;
+          if (rowStartIndex >= cardsData.length) break;
+
+          const rowEl = document.createElement("div");
+          rowEl.className = "issues-row";
+
+          for (let col = 0; col < cardsPerRow && (rowStartIndex + col) < cardsData.length; col++) {
+            const { issue, variant } = cardsData[rowStartIndex + col];
+
+            const card = document.createElement("article");
+            card.className = "issue-card";
+
+            const title = document.createElement("h3");
+            title.textContent = `${issue.topic} - ${variant.label}`;
+
+            const body = document.createElement("p");
+            body.textContent = `${issue.description} ${variant.blurb}`;
+
+            card.appendChild(title);
+            card.appendChild(body);
+            rowEl.appendChild(card);
+          }
+
+          fragment.appendChild(rowEl);
+        }
+
+        issuesTrack.appendChild(fragment);
+
+        const issueRows = gsap.utils.toArray(".issues-row");
+
+        const buildVerticalReveal = () => {
+          const animations = issueRows.map((row) => (
+            gsap.from(row.querySelectorAll(".issue-card"), {
+              opacity: 0,
+              yPercent: 18,
+              rotateX: -8,
+              stagger: 0.12,
+              duration: 0.9,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 82%",
+                toggleActions: "play none none reverse"
+              }
+            })
+          ));
+
+          return () => animations.forEach((anim) => anim && anim.kill());
+        };
+
+        mm.add("(min-width: 769px)", () => {
+          const cleanupFns = [];
+
+          const horizontalDistance = () => Math.max(0, issuesTrack.scrollWidth - issuesMarquee.clientWidth);
+
+          if (horizontalDistance() <= 0) {
+            cleanupFns.push(() => gsap.set(issuesTrack, { x: 0 }));
+            cleanupFns.push(buildVerticalReveal());
+            return () => cleanupFns.forEach((fn) => fn && fn());
+          }
+
+          const horizontalTween = gsap.to(issuesTrack, {
+            x: () => -horizontalDistance(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: issuesStackEl,
+              start: "top top",
+              end: () => `+=${horizontalDistance() + window.innerHeight * 0.6}`,
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            }
+          });
+
+          cleanupFns.push(() => {
+            horizontalTween.scrollTrigger && horizontalTween.scrollTrigger.kill();
+            horizontalTween.kill();
+            gsap.set(issuesTrack, { x: 0 });
+          });
+
+          const rowAnimations = issueRows.map((row) => (
+            gsap.from(row.querySelectorAll(".issue-card"), {
+              opacity: 0,
+              yPercent: 24,
+              rotateX: -12,
+              stagger: 0.14,
+              duration: 1.0,
+              ease: "power2.out",
+              scrollTrigger: {
+                containerAnimation: horizontalTween,
+                trigger: row,
+                start: "left 78%",
+                end: "left center",
+                toggleActions: "play none none reverse",
+                horizontal: true
+              }
+            })
+          ));
+
+          cleanupFns.push(() => rowAnimations.forEach((anim) => anim && anim.kill()));
+
+          return () => cleanupFns.forEach((fn) => fn && fn());
+        });
+
+        mm.add("(max-width: 768px)", () => buildVerticalReveal());
+
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+
+      const contactSectionEl = document.getElementById("contactSection");
+      if (contactSectionEl) {
+        const introBlock = contactSectionEl.querySelector(".contact-intro");
+        const formCard = contactSectionEl.querySelector(".contact-card");
+
+        if (introBlock && formCard) {
+          gsap.set([introBlock, formCard], { opacity: 0, y: 40 });
+
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: contactSectionEl,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
+          })
+          .to(introBlock, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(formCard, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.3");
+        }
+      }
+
+      if (supportVideoFrame && videoSectionEl) {
+        const ensureYouTubeAPI = () => {
+          if (window.YT && window.YT.Player) {
+            return Promise.resolve();
+          }
+
+          if (window.__ytApiPromise) {
+            return window.__ytApiPromise;
+          }
+
+          window.__ytApiPromise = new Promise((resolve) => {
+            const previous = window.onYouTubeIframeAPIReady;
+            window.onYouTubeIframeAPIReady = () => {
+              resolve();
+              if (typeof previous === "function") {
+                previous();
+              }
+            };
+            const existing = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+            if (!existing) {
+              const tag = document.createElement("script");
+              tag.src = "https://www.youtube.com/iframe_api";
+              document.head.appendChild(tag);
+            }
+          });
+
+          return window.__ytApiPromise;
+        };
+
+        ensureYouTubeAPI().then(() => {
+          const playerInstance = new YT.Player(supportVideoFrame, {
+            events: {
+              onReady: (event) => {
+                event.target.mute();
+
+                mm.add("(min-width: 769px)", () => {
+                  const trigger = bookTL.scrollTrigger;
+                  if (!trigger) {
+                    return () => {};
+                  }
+
+                  let playing = false;
+                  const getThreshold = () => {
+                    const labelTime = bookTL.labels?.[videoLabel] ?? bookTL.duration();
+                    const total = bookTL.duration() || 1;
+                    return Math.min(1, Math.max(0, labelTime / total));
+                  };
+
+                  const handleUpdate = () => {
+                    const shouldPlay = trigger.progress >= getThreshold();
+                    if (shouldPlay && !playing) {
+                      event.target.playVideo();
+                      playing = true;
+                    } else if (!shouldPlay && playing) {
+                      event.target.pauseVideo();
+                      playing = false;
+                    }
+                  };
+
+                  trigger.addEventListener("update", handleUpdate);
+                  handleUpdate();
+
+                  return () => {
+                    trigger.removeEventListener("update", handleUpdate);
+                    event.target.pauseVideo();
+                    playing = false;
+                  };
+                });
+
+                mm.add("(max-width: 768px)", () => {
+                  const mobilePlayback = ScrollTrigger.create({
+                    trigger: videoSectionEl,
+                    start: "top 70%",
+                    end: "bottom top",
+                    onEnter: () => event.target.playVideo(),
+                    onEnterBack: () => event.target.playVideo(),
+                    onLeave: () => event.target.pauseVideo(),
+                    onLeaveBack: () => event.target.pauseVideo()
+                  });
+                  return () => mobilePlayback.kill();
+                });
+              }
+            }
+          });
+          window.__supportVideoPlayer = playerInstance;
+        });
+      }
+
+      // Final refresh for correct pin distances
+      setTimeout(() => ScrollTrigger.refresh(), 180);
+      window.addEventListener("resize", () => ScrollTrigger.refresh());
+    });
+  </script>
+</body>
+</html>
